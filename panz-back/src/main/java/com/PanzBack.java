@@ -23,9 +23,9 @@ import javax.sql.DataSource;
 @SpringBootApplication
 @ComponentScan
 @MapperScan("com.study.dao")
-public class Study {
+public class PanzBack {
 
-    private static Logger logger = Logger.getLogger(Study.class);
+    private static Logger logger = Logger.getLogger(PanzBack.class);
 
     //DataSource配置
     @Bean
@@ -54,6 +54,6 @@ public class Study {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(Study.class,args);
+        SpringApplication.run(PanzBack.class,args);
     }
 }
