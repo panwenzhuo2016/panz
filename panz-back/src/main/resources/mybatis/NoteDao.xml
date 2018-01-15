@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.study.dao.INoteDao">
+<mapper namespace="com.back.dao.INoteDao">
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
@@ -13,7 +13,7 @@
 	</sql>
 
 	<!-- 查询（列表查询） -->
-	<select id="findList" resultType="com.study.po.Note" parameterType="Map">
+	<select id="findList" resultType="com.back.po.Note" parameterType="Map">
 		 SELECT
 		 <include refid="Base_Column_List" />
 		 FROM note a
@@ -37,7 +37,7 @@
 	</select>
 
 	<!-- 查询（根据主键ID查询） -->
-	<select id="getEntityById" resultType="com.study.po.Note" parameterType="java.lang.String">
+	<select id="getEntityById" resultType="com.back.po.Note" parameterType="java.lang.String">
 		 SELECT
 		 <include refid="Base_Column_List" />
 		 FROM note a
@@ -51,7 +51,7 @@
 	</delete>
 
 	<!-- 添加 -->
-	<insert id="add" parameterType="com.study.po.Note">
+	<insert id="add" parameterType="com.back.po.Note">
 		 INSERT INTO note
  		(id,classify_id,content,create_time,title) 
 		 VALUES 
@@ -59,7 +59,7 @@
 	</insert>
 
 	<!-- 添加 （匹配有值的字段）-->
-	<insert id="insertSelective" parameterType="com.study.po.Note">
+	<insert id="insertSelective" parameterType="com.back.po.Note">
 		 INSERT INTO note
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="id != null">	 id,	</if>
@@ -79,7 +79,7 @@
 	</insert>
 
 	<!-- 修 改-->
-	<update id="update" parameterType="com.study.po.Note">
+	<update id="update" parameterType="com.back.po.Note">
 		 UPDATE note
  		 <set> 
 			<if test="classifyId != null">	 classify_id = #{classifyId},	</if>
@@ -92,7 +92,7 @@
 	</update>
 
 	<!-- 修 改（匹配有值的字段）-->
-	<update id="updateByPrimaryKey" parameterType="com.study.po.Note">
+	<update id="updateByPrimaryKey" parameterType="com.back.po.Note">
 		 UPDATE note
 		 SET 
 			 classify_id = #{classifyId},
@@ -102,7 +102,7 @@
 		 WHERE id = #{id}
 	</update>
 
-	<select id="findDataGrid" parameterType="Map" resultType="com.study.po.Note">
+	<select id="findDataGrid" parameterType="Map" resultType="com.back.po.Note">
 		select
 		<include refid="Base_Column_List"/>
 		from note a

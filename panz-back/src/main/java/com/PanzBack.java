@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan
-@MapperScan("com.study.dao")
+@MapperScan("com.back.dao")
 public class PanzBack {
 
     private static Logger logger = Logger.getLogger(PanzBack.class);

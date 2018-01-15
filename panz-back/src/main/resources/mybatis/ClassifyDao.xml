@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.study.dao.IClassifyDao">
+<mapper namespace="com.back.dao.IClassifyDao">
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
@@ -11,7 +11,7 @@
 	</sql>
 
     <!-- 查询（列表查询） -->
-    <select id="findList" resultType="com.study.po.Classify" parameterType="Map">
+    <select id="findList" resultType="com.back.po.Classify" parameterType="Map">
         SELECT
         <include refid="Base_Column_List"/>
         FROM classify a
@@ -29,7 +29,7 @@
     </select>
 
     <!-- 查询（根据主键ID查询） -->
-    <select id="getEntityById" resultType="com.study.po.Classify" parameterType="java.lang.String">
+    <select id="getEntityById" resultType="com.back.po.Classify" parameterType="java.lang.String">
         SELECT
         <include refid="Base_Column_List"/>
         FROM classify a
@@ -43,7 +43,7 @@
 	</delete>
 
     <!-- 添加 -->
-    <insert id="add" parameterType="com.study.po.Classify">
+    <insert id="add" parameterType="com.back.po.Classify">
 		 INSERT INTO classify
  		(id,classify_name,sort) 
 		 VALUES 
@@ -51,7 +51,7 @@
 	</insert>
 
     <!-- 添加 （匹配有值的字段）-->
-    <insert id="insertSelective" parameterType="com.study.po.Classify">
+    <insert id="insertSelective" parameterType="com.back.po.Classify">
         INSERT INTO classify
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
@@ -67,7 +67,7 @@
     </insert>
 
     <!-- 修 改-->
-    <update id="update" parameterType="com.study.po.Classify">
+    <update id="update" parameterType="com.back.po.Classify">
         UPDATE classify
         <set>
             <if test="classifyName != null">classify_name = #{classifyName},</if>
@@ -78,7 +78,7 @@
     </update>
 
     <!-- 修 改（匹配有值的字段）-->
-    <update id="updateByPrimaryKey" parameterType="com.study.po.Classify">
+    <update id="updateByPrimaryKey" parameterType="com.back.po.Classify">
 		 UPDATE classify
 		 SET 
 			 classify_name = #{classifyName},
@@ -86,7 +86,7 @@
 		 WHERE id = #{id}
 	</update>
 
-    <select id="findDataGrid" parameterType="Map" resultType="com.study.po.Classify">
+    <select id="findDataGrid" parameterType="Map" resultType="com.back.po.Classify">
         select
         <include refid="Base_Column_List"/>
         from classify a
