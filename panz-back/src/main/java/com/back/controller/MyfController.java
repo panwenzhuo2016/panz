@@ -20,6 +20,7 @@ public class MyfController {
     @RequestMapping(value = "findData", method = RequestMethod.GET)
     @ResponseBody
     public List findData(Model map) {
+        System.out.println("ddd");
         map.addAttribute("name", "dsf");
         List<Myf> lst = new ArrayList<Myf>();
         lst.add(new Myf("百度","https://www.baidu.com"));
