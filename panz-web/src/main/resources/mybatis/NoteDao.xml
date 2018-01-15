@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.dao.INoteDao">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		 a.id as id,
+		a.classify_id as classifyId,
+		a.content as content,
+		a.create_time as createTime,
+		a.title as title
+	</sql>
+
+	<!-- 查询（列表查询） -->
+	<select id="findList" resultType="com.study.po.Note" parameterType="Map">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM note a
+		 WHERE 1 = 1
+			<if test="id != null and id != '' ">
+				and	a.id = #{id}
+			</if>
+			<if test="classifyId != null and classifyId != '' ">
+				and	a.classify_id = #{classifyId}
+			</if>
+			<if test="content != null and content != '' ">
+				and	a.content = #{content}
+			</if>
+			<if test="createTime != null and createTime != '' ">
+				and	a.create_time = #{createTime}
+			</if>
+			<if test="title != null and title != '' ">
+				and	a.title = #{title}
+			</if>
+
+	</select>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getEntityById" resultType="com.study.po.Note" parameterType="java.lang.String">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM note a
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="delete" parameterType="java.lang.String">
+		 DELETE FROM note
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.study.po.Note">
+		 INSERT INTO note
+ 		(id,classify_id,content,create_time,title) 
+		 VALUES 
+ 		(#{id},#{classifyId},#{content},#{createTime},#{title}) 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.study.po.Note">
+		 INSERT INTO note
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null">	 id,	</if>
+			<if test="classifyId != null">	 classify_id,	</if>
+			<if test="content != null">	 content,	</if>
+			<if test="createTime != null">	 create_time,	</if>
+			<if test="title != null">	 title,	</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id!=null">	 #{id},	</if>
+			<if test="classifyId!=null">	 #{classifyId},	</if>
+			<if test="content!=null">	 #{content},	</if>
+			<if test="createTime!=null">	 #{createTime},	</if>
+			<if test="title!=null">	 #{title},	</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="update" parameterType="com.study.po.Note">
+		 UPDATE note
+ 		 <set> 
+			<if test="classifyId != null">	 classify_id = #{classifyId},	</if>
+			<if test="content != null">	 content = #{content},	</if>
+			<if test="createTime != null">	 create_time = #{createTime},	</if>
+			<if test="title != null">	 title = #{title},	</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改（匹配有值的字段）-->
+	<update id="updateByPrimaryKey" parameterType="com.study.po.Note">
+		 UPDATE note
+		 SET 
+			 classify_id = #{classifyId},
+			 content = #{content},
+			 create_time = #{createTime},
+			 title = #{title}
+		 WHERE id = #{id}
+	</update>
+
+	<select id="findDataGrid" parameterType="Map" resultType="com.study.po.Note">
+		select
+		<include refid="Base_Column_List"/>
+		from note a
+		<include refid="condition"/>
+		order by a.create_time DESC
+
+	</select>
+	<select id="countDataGrid" parameterType="Map" resultType="int">
+		select
+		count(a.id)
+		from note a
+		<include refid="condition"/>
+
+	</select>
+
+	<sql id="condition">
+		where 1=1
+		<if test="classifyId != null and classifyId != ''">
+			and a.classify_id = #{classifyId}
+		</if>
+		<if test="title != null and title != ''">
+			and a.title like concat(concat('%',#{title}),'%')
+		</if>
+	</sql></mapper>

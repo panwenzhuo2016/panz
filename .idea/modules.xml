@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/panz.iml" filepath="$PROJECT_DIR$/.idea/panz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/panz-back/panz-back.iml" filepath="$PROJECT_DIR$/panz-back/panz-back.iml" />
+      <module fileurl="file://$PROJECT_DIR$/panz-web/panz-web.iml" filepath="$PROJECT_DIR$/panz-web/panz-web.iml" />
+    </modules>
+  </component>
+</project>

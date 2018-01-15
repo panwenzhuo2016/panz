@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/webjars/jquery/2.0.0/jquery.min.js"></script>
+    <meta charset="utf-8" />
+    <title>个人主页</title>
+    <link rel="stylesheet" href="iview/iview.css"/>
+    <script src="/webjars/vue/2.5.13/vue.min.js"></script>
+    <script src="iview/iview.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css"/>
+
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="image/a.png" style="margin-top: -10px;"/>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#" v-on:click="kxw">&nbsp;&nbsp;看新闻&nbsp;&nbsp;<span class="sr-only">(current)</span></a></li>
+                <li><a href="#" v-on:click="jl">&nbsp;&nbsp;简历&nbsp;&nbsp;</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">API文档<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" v-on:click = "BootStrap">BootStrap</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" v-on:click = "Vue">Vue</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" v-on:click = "SpringBoot">Spring Boot</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">5</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="搜索"/>
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">六</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">七<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">4</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron" style="    background-color: slategray;">
+    <h1 style="text-align: center">欢迎!</h1>
+</div>
+<div id="my-f"  v-bind:class="{ myf: isActive, 'text-danger': hasError }">
+    <todo-item
+            v-for="item in groceryList"
+            v-bind:todo="item"
+            v-bind:key="item.id">
+    </todo-item>
+</div>
+<div id="my-f2"  v-bind:class="{ myf: isActive, 'text-danger': hasError }">
+    <div v-bind:class="{ myfin: isActive}"></div>
+</div>
+<div id="app">
+    <i-button v-on:click="show">确认</i-button>
+    <Modal v-model="visible" title="欢迎">这个真不错</Modal>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            visible: false
+        },
+        methods: {
+            show: function () {
+                this.visible = true;
+            }
+        }
+    })
+
+        Vue.component("todo-item", {
+            props: ["todo"],
+            template: '<button type="button"  class="btn btn-default myfin" onclick="todoitem(\'{{todo.url}}\')">{{ todo.name }}</button>'
+        })
+        var todoitem = function (url) {
+            window.open(url);
+        }
+        var myf = new Vue({
+            el: '#my-f',
+            data: {
+                isActive: true,
+                hasError: false,
+                groceryList:[]
+            },
+            created:function(){
+                var url=getRootPath() + "/myf/findData";
+                var _self=this;
+                $.get(url,function(data){
+                    _self._data.groceryList=data;
+                })
+            },
+            methods:{
+                ds :function () {
+                    alert("33");
+                }
+            }
+
+        })
+        var myf2 = new Vue({
+            el: '#my-f2',
+            data: {
+                isActive: true,
+                hasError: false
+            }
+        })
+
+        var daohang = new Vue({
+            el: '#bs-example-navbar-collapse-1',
+            methods: {
+                kxw: function () {
+                    window.open("http://www.qq.com"); //看腾讯新闻
+                },
+                BootStrap:function () {
+                    window.open("https://v3.bootcss.com/components/");
+                },
+                Vue:function () {
+                    window.open("https://cn.vuejs.org/v2/guide/instance.html");
+                },
+                SpringBoot:function () {
+                    window.open("http://blog.didispace.com/categories/Spring-Cloud/page/6/");
+                },
+                jl:function () {
+
+                }
+            }
+        })
+
+        function getRootPath() {
+            //获取当前网址，如： http://localhost:8083/proj/meun.jsp
+            var curWwwPath = window.document.location.href;
+            //获取主机地址之后的目录，如： proj/meun.jsp
+            var pathName = window.document.location.pathname;
+            var pos = curWwwPath.indexOf(pathName);
+            //获取主机地址，如： http://localhost:8083
+            var localhostPath = curWwwPath.substring(0, pos);
+            //获取带"/"的项目名，如：/proj
+            var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+            return (localhostPath + projectName);
+        }
+
+</script>
+</body>
+<style>
+    .myf{
+        width:25%;
+        height:300px;
+        background-color: #a2897a;
+        float: left;
+        padding: 10px;
+        margin: 10px;
+    }
+    .myfin{
+        width: 100px;
+        height: 50px;
+        background-color: antiquewhite;
+        margin: 10px;
+        float: left;
+        font-size: 30px;
+        text-align: center;
+    }
+</style>
+
+</html>
