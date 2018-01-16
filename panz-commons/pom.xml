@@ -43,7 +43,12 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.44</version>
     </dependency>
-    <!--<dependency>-->
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.1.0</version>
+      </dependency>
+      <!--<dependency>-->
       <!--<groupId>net.sourceforge.pinyin4j</groupId>-->
       <!--<artifactId>pinyin4j</artifactId>-->
       <!--&lt;!&ndash;<version>2.5.0</version>&ndash;&gt;-->
