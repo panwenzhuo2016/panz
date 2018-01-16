@@ -21,6 +21,7 @@ public class MyfController {
     @ResponseBody
     public List findData(Model map) {
         System.out.println("ddd");
+        System.out.println("dddd");
         map.addAttribute("name", "dsf");
         List<Myf> lst = new ArrayList<Myf>();
         lst.add(new Myf("百度","https://www.baidu.com"));
