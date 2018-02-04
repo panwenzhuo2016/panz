@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/panz.iml" filepath="$PROJECT_DIR$/.idea/panz.iml" />
       <module fileurl="file://$PROJECT_DIR$/panz-back/panz-back.iml" filepath="$PROJECT_DIR$/panz-back/panz-back.iml" />
+      <module fileurl="file://$PROJECT_DIR$/panz-commons/panz-commons.iml" filepath="$PROJECT_DIR$/panz-commons/panz-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/panz-core/panz-core.iml" filepath="$PROJECT_DIR$/panz-core/panz-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/panz-web/panz-web.iml" filepath="$PROJECT_DIR$/panz-web/panz-web.iml" />
     </modules>
   </component>

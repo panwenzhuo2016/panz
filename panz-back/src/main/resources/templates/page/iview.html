@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/webjars/jquery/2.0.0/jquery.min.js"></script>
+    <meta charset="utf-8"/>
+    <title>个人主页</title>
+    <!--<link rel="stylesheet" href="iview/iview.css"/>-->
+    <!--<script src="/webjars/vue/2.5.13/vue.min.js"></script>-->
+    <!--<script src="iview/iview.min.js"></script>-->
+    <!--<script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>-->
+    <!--<link rel="stylesheet" href="/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css"/>-->
+    <link rel="stylesheet" href="iview/dist/main.3295f4092397eceb422d.css"/>
+    <link rel="stylesheet" name="theme" href=""/>
+
+</head>
+<body>
+    <div id="app"></div>
+    <div class="lock-screen-back" id="lock_screen_back"></div>
+    <script type="text/javascript" src="iview/dist/vender-base.3295f4092397eceb422d.js"></script>
+    <script type="text/javascript" src="iview/dist/vender-exten.3295f4092397eceb422d.js"></script>
+    <script type="text/javascript" src="iview/dist/main.3295f4092397eceb422d.js"></script>
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?2e04a00dd03eab8bc3d743ac15475f8e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <script>
+
+
+    function getRootPath() {
+        //获取当前网址，如： http://localhost:8083/proj/meun.jsp
+        var curWwwPath = window.document.location.href;
+        //获取主机地址之后的目录，如： proj/meun.jsp
+        var pathName = window.document.location.pathname;
+        var pos = curWwwPath.indexOf(pathName);
+        //获取主机地址，如： http://localhost:8083
+        var localhostPath = curWwwPath.substring(0, pos);
+        //获取带"/"的项目名，如：/proj
+        var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+        return (localhostPath + projectName);
+    }
+    </script>
+</body>
+<style>
+    .ivu-tabs-nav {
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 20px;
+    }
+
+    .qqwximg {
+        height: 38px;
+    }
+
+    .error-text {
+        color: #fa8341;
+    }
+</style>
+
+</html>

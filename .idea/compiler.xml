@@ -7,12 +7,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="panz-back" />
+        <module name="panz-commons" />
         <module name="panz-web" />
+        <module name="panzcore" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="panz-back" target="1.6" />
+      <module name="panz-commons" target="1.5" />
       <module name="panz-web" target="1.6" />
+      <module name="panzcore" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>
