@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by hasee on 2018/1/7.
@@ -22,10 +23,20 @@ public class MyfController {
     public List findData(Model map) {
         map.addAttribute("name", "dsf");
         List<Myf> lst = new ArrayList<Myf>();
-        lst.add(new Myf("百度","https://www.baidu.com"));
+        lst.add(new Myf("sdf","https://www.baidu.com"));
         lst.add(new Myf("dsf","https://www.baidu3.com"));
         lst.add(new Myf("ad","https://www.baidu2.com"));
         lst.add(new Myf("sdf","https://www.baidu1.com"));
+        return lst;
+    }
+
+    @RequestMapping(value = "uuid", method = RequestMethod.GET)
+    @ResponseBody
+    public List uuid(Model map) {
+        List<String> lst = new ArrayList<String>();
+        String uuid = UUID.randomUUID().toString();
+        lst.add(uuid);
+        lst.add(uuid.replaceAll("-",""));
         return lst;
     }
 }

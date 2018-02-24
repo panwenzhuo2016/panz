@@ -86,6 +86,12 @@
     <i-input v-model="value" placeholder="时间戳" style="width: 200px"></i-input>
     <i-button v-on:click="change">转换</i-button>
     <i-input v-model="value2" style="width: 200px;"></i-input>
+    <br/>
+    <br/>
+    UUID：
+    <i-button v-on:click="uuid">获取</i-button>
+    <i-input v-model="value3" style="width: 300px;"></i-input>
+    <i-input v-model="value4" style="width: 300px;"></i-input>
 </div>
 <script>
 
@@ -94,7 +100,10 @@
         data() {
             return {
                 value: '',
-                value2: ''
+                value2: '',
+                value3: '',
+                value4: ''
+
             }
         },
         methods: {
@@ -103,6 +112,14 @@
                 var newDate = new Date();
                 newDate.setTime(old);
                 this.value2 = newDate.toLocaleString();
+            },
+            uuid: function () {
+                var url = getRootPath() + "/myf/uuid";
+                var _self = this;
+                $.get(url, function (data) {
+                    _self._data.value3 = data[0];
+                    _self._data.value4 = data[1];
+                })
             }
         }
     }
