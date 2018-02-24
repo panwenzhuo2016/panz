@@ -38,4 +38,24 @@ public class Main {
         buildHtml.buildHtmlApp2();//app json生成
         buildHtml.buildHtmlApp3();//app 实体生成
     }
+
+
+    @Test
+    public void htmdl() throws Exception{
+        StringBuilder sql = new StringBuilder();
+        sql.append("select a.db_jieguo_tbr_guid as jieGuoGuid, b.bd_guid as biaoDuanGuid, d.gc_guid as gongChengGuid, e.xm_guid as xiangMuGuid,");
+        sql.append(" h.guid as zhongBiaoUserGuid, h.qiye_bh as qiYeBianHao, a.tbr_name as zhongBiaoUserName, b.create_time as dingBiaoTime,");
+        sql.append(" nvl(a.TB_BAOJIA, 0)/100 as zhongBiaoJinE, a.modify_time as YXTTime from DB_JIEGUO_TBR a");
+        sql.append(" LEFT JOIN DB_JIEGUO b on a.db_jieguo_guid = b.db_jieguo_guid");
+        sql.append(" LEFT JOIN ZB_GC_BD c on b.bd_guid = c.BD_GUID");
+        sql.append(" LEFT JOIN ZB_GC d on c.gc_guid = d.gc_guid");
+        sql.append(" LEFT JOIN ZB_XIANGMU e on c.xm_guid = e.xm_guid");
+        sql.append(" LEFT JOIN VIEW_QIYE h on h.qiye_bh = a.tbr_bh");
+        sql.append(" where not exists(select 1 from TONGBU_YUNFUWU_JILU x where a.db_jieguo_tbr_guid = x.yxt_guid and x.leixing = :leiXing)");
+        sql.append(" and a.is_jinru_dingbiao_dw = 1");
+        sql.append(" and a.zhongbiao_zhuangtai = 3 ");
+        sql.append(" and a.IS_DELETED = 0 and b.IS_DELETED = 0 and c.bd_name not like '%测试测试测试%'");
+        sql.append(" and d.is_plzb = 0");
+        System.out.println(sql);
+    }
 }
