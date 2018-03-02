@@ -1739,6 +1739,12 @@ public class EntityUtil {
      * @return operationTic
      */
     private String getPathName(String s) {
+        if(s == null){
+            return "";
+        }
+        if(s.length() < 2){
+            return s;
+        }
         String s1 = s.substring(0, 1);
         String s2 = s.substring(1, s.length());
         return s1.toLowerCase() + s2;
@@ -1749,6 +1755,12 @@ public class EntityUtil {
      * @return OperationTic
      */
     private String getPathNameUP(String s) {
+        if(s == null){
+            return "";
+        }
+        if(s.length() < 2){
+            return s;
+        }
         String s1 = s.substring(0, 1);
         String s2 = s.substring(1, s.length());
         return s1.toUpperCase() + s2;
