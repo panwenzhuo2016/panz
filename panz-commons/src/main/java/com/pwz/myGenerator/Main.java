@@ -20,8 +20,10 @@ public class Main {
     //生成文件
     @Test
     public void build() throws Exception{
-        EntityUtil entityUtil = new EntityUtil();
-        entityUtil.generate("build");
+//        EntityUtil entityUtil = new EntityUtil();
+//        entityUtil.generate("build");
+        EntityUtilOracel e = new EntityUtilOracel();
+        e.generate("build");
     }
     //生成字典sql
     @Test
