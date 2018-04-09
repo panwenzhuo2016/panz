@@ -20,8 +20,8 @@ public class EntityUtilOracel {
     private final String packageName = "com.linker.resmaster.module.pdsc.ordertic.";
     private final String urlpath = "module/pdsc/ordertic";
     private final String pojoName = "OrderTic";
-    private String tableName = "t_dd_dl";
-    private final String pojoStr = "指令票";
+    private String tableName = "";
+    private final String pojoStr = "";
     private final String author = "潘文卓";
 
     private final String driverName = "oracle.jdbc.driver.OracleDriver";

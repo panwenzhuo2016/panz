@@ -4,12 +4,21 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class XML2bean {
     public static void main(String[] args) {
-        String s = "<zhaoBiaoWenJianDownloadTime>招标文件下载时间</zhaoBiaoWenJianDownloadTime >  \n" +
-                "<shangWuBiaoUploadTime >商务标文件递交时间</shangWuBiaoUploadTime > \n" +
-                "<jiShuBiaoUploadTime >技术标文件递交时间</jiShuBiaoUploadTime >\n" +
-                "<ziGeShenChanUploadTime >资格审查文件递交时间</ziGeShenChanUploadTime >\n" +
-                "<qingMingQueRenTime >签名确认时间</qingMingQueRenTime >\n" +
-                "<isRuWei>是否联合体投标</isRuWei >  ";
+        String s = "<pbWeiYuanGuid>1210b552-40b-4f-25f-0b0fe</ pbWeiYuanGuid>\n" +
+                "< gongGaoGuid>公告guid</ gongGaoGuid>\n" +
+                "<biaoDuanGuid>标段guid</ biaoDuanGuid>\n" +
+                " <pwShenFenZheng>评委身份证号 </pwShenFenZheng>\n" +
+                " <pwName>评委姓名</pwName>\n" +
+                "<zhuanYeName>专业名称</zhuanYeName>\n" +
+                "<gongZuoDanWei>工作单位</gongZuoDanWei>\n" +
+                "<pbLeiXing>评标类型</pbLeiXing>\n" +
+                "<pwLeiXing>评委类型</pwLeiXing>\n" +
+                "<isQuXiao>是否取消</isQuXiao>\n" +
+                "<quXiaoYuanYin>取消原因</quXiaoYuanYin>\n" +
+                "<zuJianShenQinBj>评标委员会组建申请编号</zuJianShenQinBj>\n" +
+                "<tongZhiFangShi>通知方式</tongZhiFangShi>\n" +
+                "<tongZhiTime>通知时间</tongZhiTime>\n" +
+                "<pwKaoHe>考核核记录</pwKaoHe>";
         String[] ss = s.split(">\\n");
 
         for (String str : ss){
@@ -19,7 +28,7 @@ public class XML2bean {
 //			System.out.println(name);
 //            System.out.println("ztbReportFSGXMLInfo.set"+id.replaceAll(" ","")+"(dealString(gc.get(\""+id.replaceAll(" ","" )+"\")));");
 //            System.out.println(".addScalar(\""+del(id)+"\",StringType.INSTANCE)");
-//            System.out.println("\t\" null as "+del(id)+", \" +");
+            System.out.println("\t\" null as "+del(id)+", \" +");
 //            System.out.println("ztbReportFSGXMLInfo.set"+id.replaceAll(" ","")+"(dealString(null));");
 //            System.out.println("    \n         /**\n" +
 //                    "         * "+name+"\n" +
@@ -32,7 +41,7 @@ public class XML2bean {
 //          html();
 //         yemian();
 
-        sql();
+//        sql();
 
     }
 
@@ -40,17 +49,25 @@ public class XML2bean {
         StringBuilder sql = new StringBuilder();
         sql.append("select a.db_jieguo_tbr_guid as jieGuoGuid, b.bd_guid as biaoDuanGuid, d.gc_guid as gongChengGuid, e.xm_guid as xiangMuGuid,");
         sql.append(" h.guid as zhongBiaoUserGuid, h.qiye_bh as qiYeBianHao, a.tbr_name as zhongBiaoUserName, b.create_time as dingBiaoTime,");
-        sql.append(" nvl(a.TB_BAOJIA, 0)/100 as zhongBiaoJinE, a.modify_time as YXTTime from DB_JIEGUO_TBR a");
+        sql.append(" nvl(a.TB_BAOJIA, 0)/100 as zhongBiaoJinE, a.modify_time as YXTTime, " +
+                " a.gongQi as gongQi, " +
+                " gs.GongShi_StartTime as zhongBiaoGongShiStartTime," +
+                " gs.GongShi_EndTime as zhongBiaoGongShiEndTime," +
+                " tzs.Create_time as zhongBiaoTongZhiShuCreateTime," +
+                " gs.printTime as zhongBiaoGongShiPrintTime" +
+                " from DB_JIEGUO_TBR a");
         sql.append(" LEFT JOIN DB_JIEGUO b on a.db_jieguo_guid = b.db_jieguo_guid");
         sql.append(" LEFT JOIN ZB_GC_BD c on b.bd_guid = c.BD_GUID");
+        sql.append(" LEFT JOIN DB_ZhongBiao_JieGuo gs on a.GG_BD_GUID = gs.GGbd_Guid AND gs.IS_DELETED = 0 ");
+        sql.append(" LEFT JOIN DB_ZhongBiao_JieGuo_TongZhi tzs on a.GG_BD_GUID = tzs.GG_BD_Guid AND tzs.IS_DELETED = 0 ");
         sql.append(" LEFT JOIN ZB_GC d on c.gc_guid = d.gc_guid");
         sql.append(" LEFT JOIN ZB_XIANGMU e on c.xm_guid = e.xm_guid");
         sql.append(" LEFT JOIN VIEW_QIYE h on h.qiye_bh = a.tbr_bh");
         sql.append(" where not exists(select 1 from TONGBU_YUNFUWU_JILU x where a.db_jieguo_tbr_guid = x.yxt_guid and x.leixing = :leiXing)");
-        sql.append(" and a.is_jinru_dingbiao_dw = 1");
-        sql.append(" and a.zhongbiao_zhuangtai = 3 ");
-        sql.append(" and a.IS_DELETED = 0 and b.IS_DELETED = 0 and c.bd_name not like '%测试测试测试%'");
-        sql.append(" and d.is_plzb = 0");
+        sql.append(" and a.is_jinru_dingbiao_dw = '1'");
+        sql.append(" and a.zhongbiao_zhuangtai = '3' ");
+        sql.append(" and a.IS_DELETED = '0' and b.IS_DELETED = '0' and c.bd_name not like '%测试测试测试%'");
+        sql.append(" and d.is_plzb = '0' ");
 
         System.out.println(sql.toString());
     }
