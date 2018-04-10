@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/webjars/jquery/2.0.0/jquery.min.js"></script>
+    <meta charset="utf-8"/>
+    <title>表数据</title>
+    <link rel="stylesheet" href="iview/iview.css"/>
+    <script src="/webjars/vue/2.5.13/vue.min.js"></script>
+    <script src="iview/iview.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css"/>
+
+</head>
+<body>
+<div id="app">
+    <div>
+        <row>
+            <i-button span="12" v-on:click="search()" > 搜索 </i-button>
+        </row>
+        <i-table border="1"
+                 v-on:on-selection-change = "select"
+                 ref="selection" :columns="columns4" :data="data1"></i-table>
+    </div>
+</div>
+<script>
+
+    var Main = {
+        data () {
+            return {
+                columns4: [
+                    {
+                        type: 'selection',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
+                        title: '表名',
+                        key: 'tableName'
+                    },
+                    {
+                        title: '注释',
+                        key: 'zs'
+                    },
+                    {
+                        title: '总量',
+                        key: 'zl'
+                    },
+                    {
+                        title: '有效（未删除）',
+                        key: 'yx'
+                    }
+                ],
+                data1: [
+                ]
+            }
+        },
+        methods: {
+            handleSelectAll (status) {
+                this.$refs.selection.selectAll(status);
+            },
+            search() {
+                var _self = this;
+                var url = getRootPath() + "/getTableList";
+
+                $.get(url, function (data) {
+                    // var da = JSON.parse(data);
+                    _self._data.data1 = data;
+                })
+
+            },
+            select(selection,row){
+
+            }
+
+        }
+    }
+    var Component = Vue.extend(Main)
+    new Component().$mount('#app')
+
+
+
+
+</script>
+</body>
+
+</html>

@@ -38,6 +38,11 @@
       <version>3.3.6</version>
     </dependency>
     <dependency>
+      <groupId>oracle</groupId>
+      <artifactId>oracle</artifactId>
+      <version>jdbc6</version>
+    </dependency>
+    <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>vue</artifactId>
       <version>2.5.13</version>
@@ -104,6 +109,14 @@
           <fork>true</fork>
         </configuration>
       </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.7</source>
+                <target>1.7</target>
+            </configuration>
+        </plugin>
 
     </plugins>
     <finalName>panz-back</finalName>

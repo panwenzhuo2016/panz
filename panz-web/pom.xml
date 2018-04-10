@@ -33,6 +33,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>oracle</groupId>
+      <artifactId>oracle</artifactId>
+      <version>jdbc6</version>
+    </dependency>
+    <dependency>
       <groupId>org.webjars.bower</groupId>
       <artifactId>bootstrap</artifactId>
       <version>3.3.6</version>

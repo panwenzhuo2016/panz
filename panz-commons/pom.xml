@@ -49,6 +49,11 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.0</version>
     </dependency>
+    <dependency>
+      <groupId>oracle</groupId>
+      <artifactId>oracle</artifactId>
+      <version>jdbc6</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
     <dependency>
       <groupId>com.alibaba</groupId>

@@ -40,7 +40,7 @@ public class PageController {
         return classify;
     }
 
-    @RequestMapping(params = "getAllClassify")
+    @RequestMapping(params = "getAllClassify", method = RequestMethod.GET)
     @ResponseBody
     public List<Classify> getAllClassify() {
         Map<String, Object> params = Maps.newHashMap();

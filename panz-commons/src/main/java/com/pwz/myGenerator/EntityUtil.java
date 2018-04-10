@@ -28,7 +28,7 @@ public class EntityUtil {
     private final String user = "root";
     private final String password = "123456";
     private final String moduleName = "dsp"; //
-    private final String url = "jdbc:mysql://192.168.1.105:3306/" + moduleName + "?characterEncoding=utf8";
+    private final String url = "jdbc:mysql://192.168.3.14:3306/" + moduleName + "?characterEncoding=utf8";
     /**
      * *********************************使用前必读*******************
      * *
