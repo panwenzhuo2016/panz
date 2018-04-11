@@ -36,10 +36,10 @@ public class TableNumController {
 
     @RequestMapping(value = "getTableList", method = RequestMethod.GET)
     @ResponseBody
-    public List<Map<String, String>> getTableList(Model map) {
+    public List<Map<String, String>> getTableList(Model map,Integer size,Integer page) {
         List<Map<String, String>> r = new ArrayList<>();
         Map<String, String> res;
-        List<String> allTables = jdbcTemplate.query("select * from all_tables where owner = 'TRADE_ZS' order by table_name ASC", new RowMapper<String>() {
+        List<String> allTables = jdbcTemplate.query("select * from all_tables where owner = 'TRADE_ZS' and ROWNUM  < "+(size * page +1)+" order by table_name ASC", new RowMapper<String>() {
             @Override
             public String mapRow(ResultSet rs, int rowNum) throws SQLException {
                 String table = rs.getString(2);
@@ -47,8 +47,11 @@ public class TableNumController {
             }
         });
         List<String> zs;
+        int i = 0;
         for (String tableName : allTables) {
+            i++;
             res = new HashMap<>(4);
+            res.put("tableName",tableName);
             try {
                 res.put("zl", jdbcTemplate.queryForObject("select count(1) from  " + tableName, Integer.class).toString());
             } catch (Exception e) {
@@ -57,7 +60,7 @@ public class TableNumController {
             try {
                 res.put("yx", jdbcTemplate.queryForObject("select count(1) from  " + tableName + " where is_deleted = 0", Integer.class).toString());
             } catch (Exception e) {
-
+                res.put("yx","'无删除标识'");
             }
             try {
                 zs = jdbcTemplate.query("select * from all_tab_comments where owner = 'TRADE_ZS' and TABLE_NAME = '" + tableName + "'", new RowMapper<String>() {
@@ -69,11 +72,14 @@ public class TableNumController {
                 });
                 if (zs != null && zs.size() > 0) {
                     res.put("zs", zs.get(0));
+                } else {
+                    res.put("zs", "'空'");
                 }
             } catch (Exception e) {
 
             }
             r.add(res);
+            System.out.println("已查询 " + i + " 条");
         }
         return r;
     }

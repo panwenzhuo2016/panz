@@ -21,15 +21,16 @@
         </row>
         <i-table border="1"
                  v-on:on-selection-change = "select"
-                 ref="selection" :columns="columns4" :data="data1"></i-table>
+                 ref="selection" :columns="historyColumns" :data="historyData"></i-table>
+        <page :total="dataCount" :page-size="pageSize" show-elevator="" show-sizer="" class="paging" v-on:on-change="changepage"></page>
     </div>
 </div>
 <script>
-
+    //<![CDATA[
     var Main = {
         data () {
             return {
-                columns4: [
+                historyColumns: [
                     {
                         type: 'selection',
                         width: 60,
@@ -52,7 +53,10 @@
                         key: 'yx'
                     }
                 ],
-                data1: [
+                dataCount: 0,
+                pageSize: 10,
+                ajaxHistoryData: [],
+                historyData: [
                 ]
             }
         },
@@ -62,25 +66,46 @@
             },
             search() {
                 var _self = this;
-                var url = getRootPath() + "/getTableList";
+                var url = getRootPath() + "/getTableList?size=1&page=200";
 
                 $.get(url, function (data) {
                     // var da = JSON.parse(data);
-                    _self._data.data1 = data;
+                    _self._data.historyData = data;
                 })
 
             },
             select(selection,row){
 
+            },
+            handleListApproveHistory() {
+                var _self = this;
+                var url = getRootPath() + "/getTableList?size=1&page=200";
+                $.get(url, function (data) {
+                    // var da = JSON.parse(data);
+                    _self._data.ajaxHistoryData  = data;
+                    _self._data.dataCount =  _self._data.ajaxHistoryData.length;
+                    // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
+                    if (this.dataCount < _self._data.pageSize) {
+                        _self._data.historyData = _self._data.ajaxHistoryData;
+                    } else {
+                        _self._data.historyData = _self._data.ajaxHistoryData.slice(0, _self._data.pageSize);
+                    }
+                })
+            },
+            changepage(index) {
+                var _self = this;
+                var _start = (index - 1) * _self._data.pageSize;
+                var _end = index * _self._data.pageSize;
+                _self._data.historyData = _self._data.ajaxHistoryData.slice(_start, _end);
             }
-
+        },
+        created() {
+            this.handleListApproveHistory();
         }
     }
     var Component = Vue.extend(Main)
     new Component().$mount('#app')
-
-
-
+    //]]>
 
 </script>
 </body>
