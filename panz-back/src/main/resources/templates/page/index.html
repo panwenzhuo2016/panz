@@ -21,7 +21,7 @@
                 <img src="image/a.png" style="margin-top: -10px;"/>
             </a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div  class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"  >
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#" v-on:click="kxw">&nbsp;&nbsp;看新闻&nbsp;&nbsp;<span class="sr-only">(current)</span></a></li>
                 <li><a href="#" v-on:click="jl">&nbsp;&nbsp;简历&nbsp;&nbsp;</a></li>
@@ -38,6 +38,19 @@
                         <li><a href="#">4</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">5</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">本地<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                            <todo-item2
+                                    v-for="item in groceryList2"
+                                    v-bind:todo="item"
+                                    v-bind:key="item.id">
+                            </todo-item2>
                     </ul>
                 </li>
             </ul>
@@ -82,6 +95,7 @@
     <Modal v-model="visible" title="欢迎">这个真不错</Modal>
 </div>
 <script>
+    //<![CDATA[
     new Vue({
         el: '#app',
         data: {
@@ -96,7 +110,11 @@
 
     Vue.component("todo-item", {
         props: ["todo"],
-        template: '<button type="button"  class="btn btn-default myfin" onclick="todoitem(\'{{todo.url}}\')">{{ todo.name }}</button>'
+        template: '<button type="button" class="btn btn-default myfin" onclick="todoitem(\'{{todo.url}}\')">{{ todo.name }}</button>'
+    })
+    Vue.component("todo-item2", {
+        props: ["todo"],
+        template: '<li><a href="#">{{ todo.name }}</a></li>'
     })
     var todoitem = function (url) {
         window.open(url);
@@ -120,19 +138,25 @@
                 alert("33");
             }
         }
-
     })
-    var myf2 = new Vue({
-        el: '#my-f2',
+    var myf3 = new Vue({
+        el: '#bs-example-navbar-collapse-1',
         data: {
             isActive: true,
-            hasError: false
-        }
-    })
-
-    var daohang = new Vue({
-        el: '#bs-example-navbar-collapse-1',
-        methods: {
+            hasError: false,
+            groceryList2:[]
+        },
+        created:function(){
+            var url=getRootPath() + "/myf/findData2";
+            var _self=this;
+            $.get(url,function(data){
+                _self._data.groceryList2=data;
+            })
+        },
+        methods:{
+            ds :function () {
+                alert("33");
+            },
             kxw: function () {
                 window.open("http://www.qq.com"); //看腾讯新闻
             },
@@ -151,6 +175,18 @@
         }
     })
 
+
+
+    var myf2 = new Vue({
+        el: '#my-f2',
+        data: {
+            isActive: true,
+            hasError: false
+        }
+    })
+
+
+    //]]>
 </script>
 </body>
 <style>

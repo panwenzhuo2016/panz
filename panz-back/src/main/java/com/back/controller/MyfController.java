@@ -20,12 +20,20 @@ public class MyfController {
     @RequestMapping(value = "findData", method = RequestMethod.GET)
     @ResponseBody
     public List findData(Model map) {
-        map.addAttribute("name", "dsf");
-        List<Myf> lst = new ArrayList<Myf>();
+//        map.addAttribute("name", "dsf");
+        List<Myf> lst = new ArrayList<>();
         lst.add(new Myf("百度","https://www.baidu.com"));
         lst.add(new Myf("dsf","https://www.baidu3.com"));
-        lst.add(new Myf("ad","https://www.baidu2.com"));
-        lst.add(new Myf("sdf","https://www.baidu1.com"));
+        return lst;
+    }
+    @RequestMapping(value = "findData2", method = RequestMethod.GET)
+    @ResponseBody
+    public List findData2(Model map) {
+//        map.addAttribute("name", "dsf");
+        List<Myf> lst = new ArrayList<>();
+        lst.add(new Myf("百度2","https://www.baidu.com"));
+        lst.add(new Myf("dsf2","https://www.baidu3.com"));
+        lst.add(new Myf("d1sf2","https://www.baidu3.com"));
         return lst;
     }
 }

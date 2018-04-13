@@ -46,11 +46,13 @@
                     },
                     {
                         title: '总量',
-                        key: 'zl'
+                        key: 'zl',
+                        sortable: true
                     },
                     {
                         title: '有效（未删除）',
-                        key: 'yx'
+                        key: 'yx',
+                        sortable: true
                     }
                 ],
                 dataCount: 0,
@@ -66,7 +68,7 @@
             },
             search() {
                 var _self = this;
-                var url = getRootPath() + "/getTableList?size=1&page=200";
+                var url = getRootPath() + "/getTableList?size=1&page=100";
 
                 $.get(url, function (data) {
                     // var da = JSON.parse(data);
@@ -79,13 +81,13 @@
             },
             handleListApproveHistory() {
                 var _self = this;
-                var url = getRootPath() + "/getTableList?size=1&page=200";
+                var url = getRootPath() + "/getTableList?size=1&page=300";
                 $.get(url, function (data) {
                     // var da = JSON.parse(data);
                     _self._data.ajaxHistoryData  = data;
                     _self._data.dataCount =  _self._data.ajaxHistoryData.length;
                     // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
-                    if (this.dataCount < _self._data.pageSize) {
+                    if (!this.dataCount < _self._data.pageSize) {
                         _self._data.historyData = _self._data.ajaxHistoryData;
                     } else {
                         _self._data.historyData = _self._data.ajaxHistoryData.slice(0, _self._data.pageSize);
