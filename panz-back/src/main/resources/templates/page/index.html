@@ -114,7 +114,7 @@
     })
     Vue.component("todo-item2", {
         props: ["todo"],
-        template: '<li><a href="#">{{ todo.name }}</a></li>'
+        template: '<li><a target="_blank" href="{{todo.url}}">{{ todo.name }}</a></li>'
     })
     var todoitem = function (url) {
         window.open(url);
