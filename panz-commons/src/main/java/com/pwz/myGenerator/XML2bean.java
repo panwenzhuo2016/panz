@@ -4,21 +4,17 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class XML2bean {
     public static void main(String[] args) {
-        String s = "<pbWeiYuanGuid>1210b552-40b-4f-25f-0b0fe</ pbWeiYuanGuid>\n" +
-                "< gongGaoGuid>公告guid</ gongGaoGuid>\n" +
-                "<biaoDuanGuid>标段guid</ biaoDuanGuid>\n" +
-                " <pwShenFenZheng>评委身份证号 </pwShenFenZheng>\n" +
-                " <pwName>评委姓名</pwName>\n" +
-                "<zhuanYeName>专业名称</zhuanYeName>\n" +
-                "<gongZuoDanWei>工作单位</gongZuoDanWei>\n" +
-                "<pbLeiXing>评标类型</pbLeiXing>\n" +
-                "<pwLeiXing>评委类型</pwLeiXing>\n" +
-                "<isQuXiao>是否取消</isQuXiao>\n" +
-                "<quXiaoYuanYin>取消原因</quXiaoYuanYin>\n" +
-                "<zuJianShenQinBj>评标委员会组建申请编号</zuJianShenQinBj>\n" +
-                "<tongZhiFangShi>通知方式</tongZhiFangShi>\n" +
-                "<tongZhiTime>通知时间</tongZhiTime>\n" +
-                "<pwKaoHe>考核核记录</pwKaoHe>";
+        String s = "    <BDBH>标段编号</BDBH>\n" +
+                "    <BDMC><![CDATA[标段名称]]></BDMC>\n" +
+                "    <GG_GUID>公告GUID</GG_GUID>\n" +
+                "    <BD_GUID>标段GUID</BD_GUID>\n" +
+                "    <JBJSSJ>截标时间</JBJSSJ>\n" +
+                "    <GCLB>工程类别</GCLB>\n" +
+                "    <Owner>工作人员</Owner>\n" +
+                "    <ZBR_BH>招标人编号</ZBR_BH>\n" +
+                "    <ZBR_NAME>招标人名称</ZBR_NAME>\n" +
+                "    <ZBDL_BH>招标代理编号</ZBDL_BH>\n" +
+                "    <ZBDL_NAME>招标代理名称</ZBDL_NAME>";
         String[] ss = s.split(">\\n");
 
         for (String str : ss){
@@ -27,8 +23,8 @@ public class XML2bean {
             String name = str.substring(str.indexOf(">") +1,str.lastIndexOf("<"));
 //			System.out.println(name);
 //            System.out.println("ztbReportFSGXMLInfo.set"+id.replaceAll(" ","")+"(dealString(gc.get(\""+id.replaceAll(" ","" )+"\")));");
-//            System.out.println(".addScalar(\""+del(id)+"\",StringType.INSTANCE)");
-            System.out.println("\t\" null as "+del(id)+", \" +");
+            System.out.println(".addScalar(\""+del(id)+"\",StringType.INSTANCE)");
+//            System.out.println("\t\" null as "+del(id)+", \" +");
 //            System.out.println("ztbReportFSGXMLInfo.set"+id.replaceAll(" ","")+"(dealString(null));");
 //            System.out.println("    \n         /**\n" +
 //                    "         * "+name+"\n" +
