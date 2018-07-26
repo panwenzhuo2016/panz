@@ -37,11 +37,11 @@
       <artifactId>bootstrap</artifactId>
       <version>3.3.6</version>
     </dependency>
-    <dependency>
-      <groupId>oracle</groupId>
-      <artifactId>oracle</artifactId>
-      <version>jdbc6</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>ojdbc</groupId>-->
+      <!--<artifactId>ojdbc</artifactId>-->
+      <!--<version>14</version>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>vue</artifactId>

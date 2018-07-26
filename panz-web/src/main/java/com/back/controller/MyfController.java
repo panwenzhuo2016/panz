@@ -23,10 +23,10 @@ public class MyfController {
     public List findData(Model map) {
         map.addAttribute("name", "dsf");
         List<Myf> lst = new ArrayList<Myf>();
-        lst.add(new Myf("sdf","https://www.baidu.com"));
-        lst.add(new Myf("dsf","https://www.baidu3.com"));
-        lst.add(new Myf("ad","https://www.baidu2.com"));
-        lst.add(new Myf("sdf","https://www.baidu1.com"));
+        lst.add(new Myf("日历","https://www.baidu.com/s?ie=UTF-8&wd=%E6%97%A5%E5%8E%86"));
+        lst.add(new Myf("百度","https://www.baidu.com"));
+//        lst.add(new Myf("ad","https://www.baidu2.com"));
+//        lst.add(new Myf("sdf","https://www.baidu1.com"));
         return lst;
     }
 

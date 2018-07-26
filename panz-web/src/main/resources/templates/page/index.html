@@ -82,12 +82,13 @@
     <!--<Modal v-model="visible" title="欢迎">这个真不错</Modal>-->
 <!--</div>-->
 <div id="timeformat" style="margin-left: 20px">
+    <i-button v-on:click="rili">日历</i-button>
+    <br/>  <br/>
     时间戳转换为日期：
     <i-input v-model="value" placeholder="时间戳" style="width: 200px"></i-input>
     <i-button v-on:click="change">转换</i-button>
     <i-input v-model="value2" style="width: 200px;"></i-input>
-    <br/>
-    <br/>
+    <br/>  <br/>
     UUID：
     <i-button v-on:click="uuid">获取</i-button>
     <i-input v-model="value3" style="width: 300px;"></i-input>
@@ -120,6 +121,9 @@
                     _self._data.value3 = data[0];
                     _self._data.value4 = data[1];
                 })
+            },
+            rili:function () {
+                window.open("https://www.baidu.com/s?ie=UTF-8&amp;wd=日历;");
             }
         }
     }

@@ -58,11 +58,11 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.0</version>
     </dependency>
-    <dependency>
-      <groupId>oracle</groupId>
-      <artifactId>oracle</artifactId>
-      <version>jdbc6</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>ojdbc</groupId>-->
+      <!--<artifactId>ojdbc</artifactId>-->
+      <!--<version>14</version>-->
+    <!--</dependency>-->
     <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
     <dependency>
       <groupId>com.alibaba</groupId>
@@ -115,6 +115,21 @@
       <!--<artifactId>pinyin4j</artifactId>-->
       <!--&lt;!&ndash;<version>2.5.0</version>&ndash;&gt;-->
     <!--</dependency>-->
+
+    <!-- https://mvnrepository.com/artifact/com.alibaba.rocketmq/rocketmq-client -->
+    <dependency>
+      <groupId>com.alibaba.rocketmq</groupId>
+      <artifactId>rocketmq-client</artifactId>
+      <version>3.6.2.Final</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.alibaba.rocketmq/rocketmq-common -->
+    <dependency>
+      <groupId>com.alibaba.rocketmq</groupId>
+      <artifactId>rocketmq-common</artifactId>
+      <version>3.6.2.Final</version>
+    </dependency>
+
   </dependencies>
 
 
