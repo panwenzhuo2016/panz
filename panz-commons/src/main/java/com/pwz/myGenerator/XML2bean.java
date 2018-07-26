@@ -4,21 +4,29 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class XML2bean {
     public static void main(String[] args) {
-        String s = "<pbWeiYuanGuid>1210b552-40b-4f-25f-0b0fe</ pbWeiYuanGuid>\n" +
-                "< gongGaoGuid>公告guid</ gongGaoGuid>\n" +
-                "<biaoDuanGuid>标段guid</ biaoDuanGuid>\n" +
-                " <pwShenFenZheng>评委身份证号 </pwShenFenZheng>\n" +
-                " <pwName>评委姓名</pwName>\n" +
-                "<zhuanYeName>专业名称</zhuanYeName>\n" +
-                "<gongZuoDanWei>工作单位</gongZuoDanWei>\n" +
-                "<pbLeiXing>评标类型</pbLeiXing>\n" +
-                "<pwLeiXing>评委类型</pwLeiXing>\n" +
-                "<isQuXiao>是否取消</isQuXiao>\n" +
-                "<quXiaoYuanYin>取消原因</quXiaoYuanYin>\n" +
-                "<zuJianShenQinBj>评标委员会组建申请编号</zuJianShenQinBj>\n" +
-                "<tongZhiFangShi>通知方式</tongZhiFangShi>\n" +
-                "<tongZhiTime>通知时间</tongZhiTime>\n" +
-                "<pwKaoHe>考核核记录</pwKaoHe>";
+        String s = "  < huiYiAnPaiGuid >会议安排guid</ huiYiAnPaiGuid >\n" +
+                "< huiYiName >会议名称</ huiYiName >\n" +
+                "   < huiYiBDBH >会议标段编号</ huiYiBDBH >\n" +
+                "< huiYiDiDianGuid >会议地点guid</ huiYiDiDianGuid >\n" +
+                "< huiYiDiDianName >会议地点名称</ huiYiDiDianName >\n" +
+                "< huiYiStartTime >会议开始时间</ huiYiStartTime >\n" +
+                "< huiYiEndTime >会议结束时间</ huiYiEndTime >\n" +
+                "< yuJiRenShu >预计人数</ yuJiRenShu >\n" +
+                "< yuHuiZheName >与会者名称</ yuHuiZheName >\n" +
+                "< isDeleted >是否删除</ isDeleted >\n" +
+                "< isLinShiHuiYi >是否临时会议</ isLinShiHuiYi >\n" +
+                "< isDuiWaiGongShi >是否对外公示</ isDuiWaiGongShi >\n" +
+                "< yuHuiZheGuids>与会者guids</ yuHuiZheGuids >\n" +
+                "< isChaoShi>是否超时</ isChaoShi >\n" +
+                "< isJieShu>是否结束</ isJieShu >\n" +
+                "< huiYiLeiXing>本次会议类型</ huiYiLeiXing >\n" +
+                "< isWangShangHuiYi>是否网上会议</ isWangShangHuiYi >\n" +
+                "< isLiuBiao>是否流标</ isLiuBiao >\n" +
+                "< isFuWuAdd>是否增加服务</ isFuWuAdd >\n" +
+                "<gclxs>工程类型</gclxs>\n" +
+                "< bdsl>会议标段数</ bdsl >\n" +
+                "< hysd>会议时段</ hysd >\n" +
+                "< isYuanZhuanJiaFuYi>是否原专家复议</ isYuanZhuanJiaFuYi >";
         String[] ss = s.split(">\\n");
 
         for (String str : ss){
@@ -27,8 +35,8 @@ public class XML2bean {
             String name = str.substring(str.indexOf(">") +1,str.lastIndexOf("<"));
 //			System.out.println(name);
 //            System.out.println("ztbReportFSGXMLInfo.set"+id.replaceAll(" ","")+"(dealString(gc.get(\""+id.replaceAll(" ","" )+"\")));");
-//            System.out.println(".addScalar(\""+del(id)+"\",StringType.INSTANCE)");
-            System.out.println("\t\" null as "+del(id)+", \" +");
+            System.out.println(".addScalar(\""+del(id)+"\",StringType.INSTANCE)");
+//            System.out.println("\t\" null as "+del(id)+", \" +");
 //            System.out.println("ztbReportFSGXMLInfo.set"+id.replaceAll(" ","")+"(dealString(null));");
 //            System.out.println("    \n         /**\n" +
 //                    "         * "+name+"\n" +
@@ -37,12 +45,37 @@ public class XML2bean {
 //                    "        private String "+del(id)+";");
 //            System.out.println("\tbean.set"+Util.getPathNameUP(del(id))+"(dealString(map.get(\""+del(id)+"\")));");
         }
+//        createwsBean(ss);
 
 //          html();
 //         yemian();
 
 //        sql();
 
+    }
+
+    private static void createwsBean(String[] ss) {
+        System.out.println("package com.zhulong.jobtask.vo;\n" +
+                "\n" +
+                "import javax.xml.bind.annotation.XmlAccessType;\n" +
+                "import javax.xml.bind.annotation.XmlAccessorType;\n" +
+                "import javax.xml.bind.annotation.XmlElement;\n" +
+                "import javax.xml.bind.annotation.XmlRootElement;\n" +
+
+                "@XmlAccessorType(XmlAccessType.FIELD)\n" +
+                "@XmlRootElement(name=\"huiYiAnPaiData\")\n" +
+                "public class HuiYiAnPaiData {\n" +
+                "\n"
+        );
+        for (String str : ss) {
+            String id = str.substring(str.indexOf("<") + 1,str.indexOf(">"));
+            id = id.trim();
+            System.out.println(   "\t@XmlElement(name=\""+id+"\")\n" +
+                    "\tprivate String "+id+";\n" );
+        }
+
+                System.out.println(   "\t}\n" +
+                "}\n");
     }
 
     private static void sql() {
