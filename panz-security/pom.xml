@@ -27,9 +27,6 @@
             <artifactId>panz-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
-
-
     </dependencies>
 
     <build>
