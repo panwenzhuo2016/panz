@@ -6,7 +6,6 @@
 
 package com.util;
 
-import com.mysql.jdbc.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

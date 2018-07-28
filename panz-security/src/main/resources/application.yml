@@ -48,3 +48,5 @@ pagehelper:
 logging:
   level:
      com.winterchen.dao : debug
+  path: E:\idea\panz\panz\panz-security
+
