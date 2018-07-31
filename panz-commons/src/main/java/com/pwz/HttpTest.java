@@ -3,9 +3,9 @@ package com.pwz;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 import org.junit.Test;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -18,11 +18,6 @@ import java.net.URL;
  */
 public class HttpTest {
 	
-//	public static void main(String[] args) throws Exception{
-////		sendGet();
-//		sendPostJson();
-////		sendPostForm();
-//	}
 
     @Test
 	public void sendPostJson() throws Exception{
@@ -37,7 +32,7 @@ public class HttpTest {
 		byte[] data = jsonStr.getBytes();
         URL url = new URL(path);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
+        conn.setRequestMethod(RequestMethod.POST.name());
         conn.setDoOutput(true);
         conn.setRequestProperty("Authorization","Bearer "+base64);
         conn.setRequestProperty("Connection", "keep-alive");
@@ -48,7 +43,7 @@ public class HttpTest {
         outStream.flush();
         outStream.close();
         if(conn.getResponseCode() == 200){
-        	BufferedReader in = new BufferedReader(new InputStreamReader((InputStream) conn.getInputStream(), "UTF-8"));
+        	BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
         	String msg = in.readLine();
         	System.out.println(msg);
             in.close();
@@ -58,12 +53,12 @@ public class HttpTest {
 
 	@Test
     public void sendPostForm() throws Exception{
-		String path = "http://127.0.0.1:8080/";
-		String parm = "id=10001&name=yunfengCheng&sex=M";
+		String path = "http://127.0.0.1:8080/user/login";
+		String parm = "username=234&password=456";
 		byte[] data = parm.getBytes();
         URL url = new URL(path);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
+        conn.setRequestMethod(RequestMethod.POST.name());
         conn.setDoOutput(true);
         conn.setRequestProperty("Connection", "close");
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
@@ -73,7 +68,7 @@ public class HttpTest {
         outStream.flush();
         outStream.close();
         if(conn.getResponseCode() == 200) {
-            BufferedReader in = new BufferedReader(new InputStreamReader((InputStream) conn.getInputStream(), "UTF-8"));
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             String msg = in.readLine();
         	System.out.println("msg: " + msg);
             in.close();
@@ -83,11 +78,11 @@ public class HttpTest {
 
 	@Test
     public void sendGet() throws Exception{
-		String path = "http://127.0.0.1:8080/";
-		String reqUrl = path + "?id=10001&name=yunfengCheng&sex=M";
+		String path = "http://127.0.0.1:8080/login.html";
+		String reqUrl = path + "";
         URL url = new URL(reqUrl);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
+        conn.setRequestMethod(RequestMethod.GET.name());
         conn.setDoOutput(true);
         conn.connect();
         if (conn.getResponseCode() == 200) {
