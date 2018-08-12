@@ -2,6 +2,7 @@ package com.pwz.myGenerator;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 
 import java.io.*;
 import java.sql.*;
@@ -1678,7 +1679,7 @@ public class EntityUtilOracel {
             // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
             // 第四步，创建单元格，并设置值表头 设置表头居中
             HSSFCellStyle style = wb.createCellStyle();
-            style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+            style.setAlignment(HorizontalAlignment.CENTER); // 创建一个居中格式
 
             HSSFRow row = null;
             HSSFCell cell = null;

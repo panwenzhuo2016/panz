@@ -29,6 +29,21 @@ public class T {
             execl.setColumn(i,user.getId(),user.getName(),user.getPhone(),user.getSex());
             i++;
         }
+        execl.createSheet("ddd2");
+        execl.setTitle("wewewe",4);
+        execl.setSubTitle("sdfafds");
+        execl.setColumnName("a", "b", "c", "b", "c");
+         users = new ArrayList<>();
+        users.add(new User("34","sdf","sdf","eeee"));
+        users.add(new User("34","sdf","sdf","eeee"));
+        users.add(new User("344","sdf","sdf","eeee"));
+        users.add(new User("344","sdf","sdf44","eeee"));
+        users.add(new User("3444","s44df","44sdf","eeee"));
+         i=3;
+        for (User user : users) {
+            execl.setColumn(i,user.getId(),user.getName(),user.getPhone(),user.getSex());
+            i++;
+        }
         execl.write("e:\\学生.xls");
 
 

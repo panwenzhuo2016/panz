@@ -26,6 +26,7 @@ public class Execl {
     private boolean hasTitle;
     private boolean hasSubTitle;
     private boolean hasColumnWidth;
+    private boolean hasSheet;
     private int columnNum;
     private static final int MULTIPLE = 20;
 
@@ -35,6 +36,9 @@ public class Execl {
         sheet = hwb.createSheet(sheetName);
         //给单子名称一个长度
         sheet.setDefaultColumnWidth((short) 30);
+        hasSheet = true;
+        hasTitle = false;
+        hasSubTitle = false;
     }
 
     public void setTitle(String titleName, int columnNum) {

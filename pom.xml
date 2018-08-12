@@ -26,6 +26,7 @@
         <module>panz-core</module>
         <module>panz-web</module>
         <module>panz-security</module>
+        <module>pwz-tools</module>
     </modules>
 
     <properties>
