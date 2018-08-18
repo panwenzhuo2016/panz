@@ -4,8 +4,7 @@
 
   <groupId>com.pwz</groupId>
   <artifactId>panz-back</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
 
   <name>panz-back</name>
   <url>http://maven.apache.org</url>

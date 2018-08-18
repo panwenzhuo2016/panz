@@ -4,8 +4,7 @@
 
   <groupId>com.pwz</groupId>
   <artifactId>panz-web</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
 
   <name>panz-web</name>
   <url>http://maven.apache.org</url>
@@ -22,6 +21,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>panz-core</artifactId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.belerweb/pinyin4j -->
 
 
     <!-- https://mvnrepository.com/artifact/ojdbc/ojdbc -->

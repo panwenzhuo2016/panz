@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan
-@MapperScan("com.back.dao")
+@MapperScan("com.*.dao")
 public class Study {
 
     private static Logger logger = Logger.getLogger(Study.class);

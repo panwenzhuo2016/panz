@@ -1,6 +1,7 @@
 package com.pwz.myGenerator;
 
 import com.pwz.util.DateUtil;
+import com.pwz.util.FileUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
@@ -32,17 +33,17 @@ public class AAA {
     }
 
     public static void main(String[] args) {
-        String[] tbr_name = AAA.getFileContent("G:\\zhulong\\zhuzhengshi\\new 3.txt");
-        String[] create_time = AAA.getFileContent("G:\\zhulong\\zhuzhengshi\\new 4.txt");
+        String[] tbr_name = FileUtil.getFileContent("G:\\zhulong\\zhuzhengshi\\new 3.txt");
+        String[] create_time = FileUtil.getFileContent("G:\\zhulong\\zhuzhengshi\\new 4.txt");
 
         for (int i = 0; i < tbr_name.length; i++) {
             System.out.println("update  ZB_HuiYi_AnPai set is_jieshu = 1, HuiYi_EndTime = "+ DateUtil.parse(create_time[i],"yyyy-MM-dd HH:mm").getTime()+" where huiyi_name like '"+tbr_name[i]+"' and (HuiYi_LeiXing_name_str like '%开%' or huiyi_leixing = 1) and is_deleted = 0 ");
         }
     }
     public static void main2(String[] args) {
-        String[] tbr_name = AAA.getFileContent("G:\\zhulong\\zhuzhengshi\\new 3.txt");
-        String[] create_time = AAA.getFileContent("G:\\zhulong\\zhuzhengshi\\new 4.txt");
-        String[] bdguid = AAA.getFileContent("G:\\zhulong\\zhuzhengshi\\new 5.txt");
+        String[] tbr_name = FileUtil.getFileContent("G:\\zhulong\\zhuzhengshi\\new 3.txt");
+        String[] create_time = FileUtil.getFileContent("G:\\zhulong\\zhuzhengshi\\new 4.txt");
+        String[] bdguid = FileUtil.getFileContent("G:\\zhulong\\zhuzhengshi\\new 5.txt");
 
         List<String> name = new ArrayList<>();
         List<String> bdguids = new ArrayList<>();
@@ -72,25 +73,6 @@ public class AAA {
 
     }
 
-    public static String[] getFileContent(String p) {
-        StringBuffer sb = new StringBuffer("");
-        try {
-            // read file content from file
-            FileReader reader = new FileReader(p);
-            BufferedReader br = new BufferedReader(reader);
-            String str = null;
-            while ((str = br.readLine()) != null) {
-                sb.append(str + "\r\n");
-            }
-            br.close();
-            reader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String[] split = sb.toString().split("\r\n");
-        return split;
-    }
+
 
 }

@@ -35,9 +35,13 @@ public class Log {
         sb.append(msg).append("\n");
         return sb;
     }
+    public StringBuffer insert(String msg){
+        sb.insert(0,msg).append("\n");
+        return sb;
+    }
     public boolean write2Path(){
         try{
-            info(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            insert("打印时间："+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(path+ ".log"),true));
             writer.write("\n"+sb);
             writer.close();
