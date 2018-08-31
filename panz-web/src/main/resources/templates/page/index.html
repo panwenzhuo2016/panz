@@ -103,7 +103,8 @@
 
     </i-table>
     <page :total="total" show-sizer show-total show-elevator
-          v-on:change="change" v-on:page-size-change="sizechange"  ></page>
+
+          @on-change="handlePage" @on-page-size-change='handlePageSize'></page>
 </div>
 <script>
 
@@ -216,11 +217,13 @@
         data: {
             columns1: [],
             data1: [],
-            total : 0
+            total : 0,
+            pageSize:10,
+            page: 0
         },
         created:function(){
-            var url=getRootPath() + "/gupiao/findData";
             var _self=this;
+            var url=getRootPath() + "/gupiao/findData?page=" + _self._data.page + "&pageSize=" +  _self._data.pageSize ;
             $.get(url,function(data){
                 _self._data.columns1=data.columns1;
                 _self._data.data1=data.data1;
@@ -249,11 +252,25 @@
                 });
                 this.$Message.info('This is a info tip');
             },
-            change: function () {
-                this.$Message.info('This is a info tip');
+            handlePageSize: function (pageSize) {
+                var _self=this;
+                _self._data.pageSize = pageSize;
+                var url=getRootPath() + "/gupiao/findData?page=" + _self._data.page + "&pageSize=" +  _self._data.pageSize ;
+                $.get(url,function(data){
+                    _self._data.columns1=data.columns1;
+                    _self._data.data1=data.data1;
+                    _self._data.total=data.total;
+                })
             },
-            sizechange: function () {
-                this.$Message.info('This is a info tip');
+            handlePage: function (page) {
+                var _self=this;
+                _self._data.page = page;
+                var url=getRootPath() + "/gupiao/findData?page=" + _self._data.page + "&pageSize=" +  _self._data.pageSize ;
+                $.get(url,function(data){
+                    _self._data.columns1=data.columns1;
+                    _self._data.data1=data.data1;
+                    _self._data.total=data.total;
+                })
             }
 
         }

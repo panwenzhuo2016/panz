@@ -1,6 +1,8 @@
 package com;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -33,7 +35,7 @@ public class Study {
     @Bean
     @ConfigurationProperties(prefix="spring.datasource")
     public DataSource dataSource() {
-        return new org.apache.tomcat.jdbc.pool.DataSource();
+        return new com.alibaba.druid.pool.DruidDataSource();
     }
 
     //提供SqlSeesion
@@ -44,6 +46,10 @@ public class Study {
         sqlSessionFactoryBean.setDataSource(dataSource());
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+
+        Interceptor[] plugins =  new Interceptor[]{ pageHelper()};
+
+        sqlSessionFactoryBean.setPlugins(plugins);
 
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mybatis/*.xml"));
 
@@ -57,15 +63,17 @@ public class Study {
 
     //配置mybatis的分页插件pageHelper
     @Bean
-    public PageHelper pageHelper(){
+    public PageInterceptor pageHelper(){
+        PageInterceptor pageInterceptor = new PageInterceptor();
         PageHelper pageHelper = new PageHelper();
         Properties properties = new Properties();
         properties.setProperty("offsetAsPageNum","true");
         properties.setProperty("rowBoundsWithCount","true");
         properties.setProperty("reasonable","true");
-        properties.setProperty("dialect","mysql");    //配置mysql数据库的方言
+//        properties.setProperty("dialect","com.mysql.jdbc.Driver");    //配置mysql数据库的方言
         pageHelper.setProperties(properties);
-        return pageHelper;
+        pageInterceptor.setProperties(properties);
+        return pageInterceptor;
     }
 
     public static void main(String[] args) {

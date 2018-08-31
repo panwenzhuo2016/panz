@@ -245,14 +245,15 @@
     <if test="serialVersionUID != null and serialVersionUID != '' ">
       and	a.serialVersionUID = #{serialVersionUID}
     </if>
-    limit #{currentPage},#{pageSize}
-
+      order by a.dai_ma desc
   </select>
+
   <select id="findAll" resultType="com.gupiao.pojo.GuPiao">
     SELECT
     <include refid="Base_Column_List" />
     FROM gu_piao
   </select>
+
   <select id="count"   parameterType="Map"  resultType="int">
     SELECT
     count(1)

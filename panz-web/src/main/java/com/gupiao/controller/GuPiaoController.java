@@ -34,14 +34,14 @@ public class GuPiaoController {
 
     @RequestMapping(value = "findData", method = RequestMethod.GET)
     @ResponseBody
-    public Table findData(Model map) {
+    public Table findData(Model map,String page,String pageSize) {
         Table table = new Table();
         List<TableTitle> columns1 = new ArrayList<>();
         columns1.add(new TableTitle("名字", "mingZi"));
         columns1.add(new TableTitle("代码", "daiMa"));
         columns1.add(new TableTitle("当前价格", "dangQianJiaGe"));
         table.setColumns1(columns1);
-        PageBean<GuPiao> datas = guPiaoService.findByPage(1,10);
+        PageBean<GuPiao> datas = guPiaoService.findByPage(Integer.valueOf(page),Integer.valueOf(pageSize));
 //        List<GuPiao> datas = new ArrayList<>();
 //        GuPiao d = guPiaoMapper.selectByPrimaryKey("aeeada51e48c4542927b73c72b60f7ce");
 //        datas.add(d);

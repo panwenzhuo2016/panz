@@ -29,17 +29,24 @@ public class GuPiaoServiceImpl implements GuPiaoService {
     public PageBean<GuPiao> findByPage(int currentPage, int pageSize) {
         //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
         PageHelper.startPage(currentPage, pageSize);
-        Map<String,Object> map = new HashMap<>();
-        map.put("currentPage",currentPage);
-        map.put("pageSize",pageSize);
+//        page(currentPage, pageSize);
+        Map<String,Object> map = new HashMap<>(16);
+        map.put("md","md");
 
         List<GuPiao> allItems = guPiaoMapper.findList(map);        //全部商品
+//        List<GuPiao> allItems = guPiaoMapper.findAll();        //全部商品
 
-        PageInfo<GuPiao> page = new PageInfo<GuPiao>(allItems);
+        PageInfo<GuPiao> page = new PageInfo<>(allItems);
 
         int countNums = guPiaoMapper.count(new HashMap<>());            //总记录数
         PageBean<GuPiao> pageData = new PageBean<>(currentPage, pageSize, countNums);
         pageData.setItems(allItems);
         return pageData;
+    }
+
+    private void page(int currentPage, int pageSize) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("currentPage",currentPage);
+        map.put("pageSize",pageSize);
     }
 }
