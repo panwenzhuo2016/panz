@@ -67,6 +67,15 @@
     zong_shi_zhi, shi_jing_lu, zhang_ting_jia, die_ting_jia, create_time, create_guid, 
     modify_time, modify_guid, is_deleted
   </sql>
+
+  <!-- 通用查询结果列-->
+  <sql id="Base_Column_List2">
+    a.id as id,
+    a.ming_zi as mingZi,
+    a.dai_ma as daiMa,
+    a.dang_qian_jia_ge as dangQianJiaGe
+  </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated
@@ -85,6 +94,319 @@
     delete from gu_piao
     where id = #{id,jdbcType=CHAR}
   </delete>
+
+  <!-- 查询（列表查询） -->
+  <select id="findList" resultType="com.gupiao.pojo.GuPiao" parameterType="Map">
+    SELECT
+    <include refid="Base_Column_List2" />
+    FROM gu_piao a
+    WHERE 1 = 1
+    <if test="id != null and id != '' ">
+      and	a.id = #{id}
+    </if>
+    <if test="mingZi != null and mingZi != '' ">
+      and	a.mingZi = #{mingZi}
+    </if>
+    <if test="daiMa != null and daiMa != '' ">
+      and	a.daiMa = #{daiMa}
+    </if>
+    <if test="dangQianJiaGe != null and dangQianJiaGe != '' ">
+      and	a.dangQianJiaGe = #{dangQianJiaGe}
+    </if>
+    <if test="zuoShou != null and zuoShou != '' ">
+      and	a.zuoShou = #{zuoShou}
+    </if>
+    <if test="jinKai != null and jinKai != '' ">
+      and	a.jinKai = #{jinKai}
+    </if>
+    <if test="chengJiaoLiangShou != null and chengJiaoLiangShou != '' ">
+      and	a.chengJiaoLiangShou = #{chengJiaoLiangShou}
+    </if>
+    <if test="waiPan != null and waiPan != '' ">
+      and	a.waiPan = #{waiPan}
+    </if>
+    <if test="neiPan != null and neiPan != '' ">
+      and	a.neiPan = #{neiPan}
+    </if>
+    <if test="maiYi != null and maiYi != '' ">
+      and	a.maiYi = #{maiYi}
+    </if>
+    <if test="maiYiLiangShou2 != null and maiYiLiangShou2 != '' ">
+      and	a.maiYiLiangShou2 = #{maiYiLiangShou2}
+    </if>
+    <if test="mai2 != null and mai2 != '' ">
+      and	a.mai2 = #{mai2}
+    </if>
+    <if test="mai3 != null and mai3 != '' ">
+      and	a.mai3 = #{mai3}
+    </if>
+    <if test="mai4 != null and mai4 != '' ">
+      and	a.mai4 = #{mai4}
+    </if>
+    <if test="mai5 != null and mai5 != '' ">
+      and	a.mai5 = #{mai5}
+    </if>
+    <if test="maYi != null and maYi != '' ">
+      and	a.maYi = #{maYi}
+    </if>
+    <if test="maYiLiang != null and maYiLiang != '' ">
+      and	a.maYiLiang = #{maYiLiang}
+    </if>
+    <if test="ma2 != null and ma2 != '' ">
+      and	a.ma2 = #{ma2}
+    </if>
+    <if test="ma3 != null and ma3 != '' ">
+      and	a.ma3 = #{ma3}
+    </if>
+    <if test="ma4 != null and ma4 != '' ">
+      and	a.ma4 = #{ma4}
+    </if>
+    <if test="ma5 != null and ma5 != '' ">
+      and	a.ma5 = #{ma5}
+    </if>
+    <if test="zuiJinZhuBiChengJiao != null and zuiJinZhuBiChengJiao != '' ">
+      and	a.zuiJinZhuBiChengJiao = #{zuiJinZhuBiChengJiao}
+    </if>
+    <if test="shiJian != null and shiJian != '' ">
+      and	a.shiJian = #{shiJian}
+    </if>
+    <if test="zhangDie != null and zhangDie != '' ">
+      and	a.zhangDie = #{zhangDie}
+    </if>
+    <if test="zhangDie2 != null and zhangDie2 != '' ">
+      and	a.zhangDie2 = #{zhangDie2}
+    </if>
+    <if test="zuiGao != null and zuiGao != '' ">
+      and	a.zuiGao = #{zuiGao}
+    </if>
+    <if test="zuiDi != null and zuiDi != '' ">
+      and	a.zuiDi = #{zuiDi}
+    </if>
+    <if test="jiaGe != null and jiaGe != '' ">
+      and	a.jiaGe = #{jiaGe}
+    </if>
+    <if test="chengJiaoLiang != null and chengJiaoLiang != '' ">
+      and	a.chengJiaoLiang = #{chengJiaoLiang}
+    </if>
+    <if test="chengJiaoE != null and chengJiaoE != '' ">
+      and	a.chengJiaoE = #{chengJiaoE}
+    </if>
+    <if test="chengJiaoLiangShou2 != null and chengJiaoLiangShou2 != '' ">
+      and	a.chengJiaoLiangShou2 = #{chengJiaoLiangShou2}
+    </if>
+    <if test="chengJiaoEWan2 != null and chengJiaoEWan2 != '' ">
+      and	a.chengJiaoEWan2 = #{chengJiaoEWan2}
+    </if>
+    <if test="huanShouLu != null and huanShouLu != '' ">
+      and	a.huanShouLu = #{huanShouLu}
+    </if>
+    <if test="shiYingLu != null and shiYingLu != '' ">
+      and	a.shiYingLu = #{shiYingLu}
+    </if>
+    <if test="zuiGao2 != null and zuiGao2 != '' ">
+      and	a.zuiGao2 = #{zuiGao2}
+    </if>
+    <if test="zuiDi2 != null and zuiDi2 != '' ">
+      and	a.zuiDi2 = #{zuiDi2}
+    </if>
+    <if test="zhenFu != null and zhenFu != '' ">
+      and	a.zhenFu = #{zhenFu}
+    </if>
+    <if test="liuTongShiZhi != null and liuTongShiZhi != '' ">
+      and	a.liuTongShiZhi = #{liuTongShiZhi}
+    </if>
+    <if test="zongShiZhi != null and zongShiZhi != '' ">
+      and	a.zongShiZhi = #{zongShiZhi}
+    </if>
+    <if test="shiJingLu != null and shiJingLu != '' ">
+      and	a.shiJingLu = #{shiJingLu}
+    </if>
+    <if test="zhangTingJia != null and zhangTingJia != '' ">
+      and	a.zhangTingJia = #{zhangTingJia}
+    </if>
+    <if test="dieTingJia != null and dieTingJia != '' ">
+      and	a.dieTingJia = #{dieTingJia}
+    </if>
+    <if test="createTime != null and createTime != '' ">
+      and	a.createTime = #{createTime}
+    </if>
+    <if test="createGuid != null and createGuid != '' ">
+      and	a.createGuid = #{createGuid}
+    </if>
+    <if test="modifyTime != null and modifyTime != '' ">
+      and	a.modifyTime = #{modifyTime}
+    </if>
+    <if test="modifyGuid != null and modifyGuid != '' ">
+      and	a.modifyGuid = #{modifyGuid}
+    </if>
+    <if test="isDeleted != null and isDeleted != '' ">
+      and	a.isDeleted = #{isDeleted}
+    </if>
+    <if test="serialVersionUID != null and serialVersionUID != '' ">
+      and	a.serialVersionUID = #{serialVersionUID}
+    </if>
+    limit #{currentPage},#{pageSize}
+
+  </select>
+  <select id="findAll" resultType="com.gupiao.pojo.GuPiao">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM gu_piao
+  </select>
+  <select id="count"   parameterType="Map"  resultType="int">
+    SELECT
+    count(1)
+    FROM gu_piao a
+    WHERE 1 = 1
+    <if test="id != null and id != '' ">
+      and	a.id = #{id}
+    </if>
+    <if test="mingZi != null and mingZi != '' ">
+      and	a.mingZi = #{mingZi}
+    </if>
+    <if test="daiMa != null and daiMa != '' ">
+      and	a.daiMa = #{daiMa}
+    </if>
+    <if test="dangQianJiaGe != null and dangQianJiaGe != '' ">
+      and	a.dangQianJiaGe = #{dangQianJiaGe}
+    </if>
+    <if test="zuoShou != null and zuoShou != '' ">
+      and	a.zuoShou = #{zuoShou}
+    </if>
+    <if test="jinKai != null and jinKai != '' ">
+      and	a.jinKai = #{jinKai}
+    </if>
+    <if test="chengJiaoLiangShou != null and chengJiaoLiangShou != '' ">
+      and	a.chengJiaoLiangShou = #{chengJiaoLiangShou}
+    </if>
+    <if test="waiPan != null and waiPan != '' ">
+      and	a.waiPan = #{waiPan}
+    </if>
+    <if test="neiPan != null and neiPan != '' ">
+      and	a.neiPan = #{neiPan}
+    </if>
+    <if test="maiYi != null and maiYi != '' ">
+      and	a.maiYi = #{maiYi}
+    </if>
+    <if test="maiYiLiangShou2 != null and maiYiLiangShou2 != '' ">
+      and	a.maiYiLiangShou2 = #{maiYiLiangShou2}
+    </if>
+    <if test="mai2 != null and mai2 != '' ">
+      and	a.mai2 = #{mai2}
+    </if>
+    <if test="mai3 != null and mai3 != '' ">
+      and	a.mai3 = #{mai3}
+    </if>
+    <if test="mai4 != null and mai4 != '' ">
+      and	a.mai4 = #{mai4}
+    </if>
+    <if test="mai5 != null and mai5 != '' ">
+      and	a.mai5 = #{mai5}
+    </if>
+    <if test="maYi != null and maYi != '' ">
+      and	a.maYi = #{maYi}
+    </if>
+    <if test="maYiLiang != null and maYiLiang != '' ">
+      and	a.maYiLiang = #{maYiLiang}
+    </if>
+    <if test="ma2 != null and ma2 != '' ">
+      and	a.ma2 = #{ma2}
+    </if>
+    <if test="ma3 != null and ma3 != '' ">
+      and	a.ma3 = #{ma3}
+    </if>
+    <if test="ma4 != null and ma4 != '' ">
+      and	a.ma4 = #{ma4}
+    </if>
+    <if test="ma5 != null and ma5 != '' ">
+      and	a.ma5 = #{ma5}
+    </if>
+    <if test="zuiJinZhuBiChengJiao != null and zuiJinZhuBiChengJiao != '' ">
+      and	a.zuiJinZhuBiChengJiao = #{zuiJinZhuBiChengJiao}
+    </if>
+    <if test="shiJian != null and shiJian != '' ">
+      and	a.shiJian = #{shiJian}
+    </if>
+    <if test="zhangDie != null and zhangDie != '' ">
+      and	a.zhangDie = #{zhangDie}
+    </if>
+    <if test="zhangDie2 != null and zhangDie2 != '' ">
+      and	a.zhangDie2 = #{zhangDie2}
+    </if>
+    <if test="zuiGao != null and zuiGao != '' ">
+      and	a.zuiGao = #{zuiGao}
+    </if>
+    <if test="zuiDi != null and zuiDi != '' ">
+      and	a.zuiDi = #{zuiDi}
+    </if>
+    <if test="jiaGe != null and jiaGe != '' ">
+      and	a.jiaGe = #{jiaGe}
+    </if>
+    <if test="chengJiaoLiang != null and chengJiaoLiang != '' ">
+      and	a.chengJiaoLiang = #{chengJiaoLiang}
+    </if>
+    <if test="chengJiaoE != null and chengJiaoE != '' ">
+      and	a.chengJiaoE = #{chengJiaoE}
+    </if>
+    <if test="chengJiaoLiangShou2 != null and chengJiaoLiangShou2 != '' ">
+      and	a.chengJiaoLiangShou2 = #{chengJiaoLiangShou2}
+    </if>
+    <if test="chengJiaoEWan2 != null and chengJiaoEWan2 != '' ">
+      and	a.chengJiaoEWan2 = #{chengJiaoEWan2}
+    </if>
+    <if test="huanShouLu != null and huanShouLu != '' ">
+      and	a.huanShouLu = #{huanShouLu}
+    </if>
+    <if test="shiYingLu != null and shiYingLu != '' ">
+      and	a.shiYingLu = #{shiYingLu}
+    </if>
+    <if test="zuiGao2 != null and zuiGao2 != '' ">
+      and	a.zuiGao2 = #{zuiGao2}
+    </if>
+    <if test="zuiDi2 != null and zuiDi2 != '' ">
+      and	a.zuiDi2 = #{zuiDi2}
+    </if>
+    <if test="zhenFu != null and zhenFu != '' ">
+      and	a.zhenFu = #{zhenFu}
+    </if>
+    <if test="liuTongShiZhi != null and liuTongShiZhi != '' ">
+      and	a.liuTongShiZhi = #{liuTongShiZhi}
+    </if>
+    <if test="zongShiZhi != null and zongShiZhi != '' ">
+      and	a.zongShiZhi = #{zongShiZhi}
+    </if>
+    <if test="shiJingLu != null and shiJingLu != '' ">
+      and	a.shiJingLu = #{shiJingLu}
+    </if>
+    <if test="zhangTingJia != null and zhangTingJia != '' ">
+      and	a.zhangTingJia = #{zhangTingJia}
+    </if>
+    <if test="dieTingJia != null and dieTingJia != '' ">
+      and	a.dieTingJia = #{dieTingJia}
+    </if>
+    <if test="createTime != null and createTime != '' ">
+      and	a.createTime = #{createTime}
+    </if>
+    <if test="createGuid != null and createGuid != '' ">
+      and	a.createGuid = #{createGuid}
+    </if>
+    <if test="modifyTime != null and modifyTime != '' ">
+      and	a.modifyTime = #{modifyTime}
+    </if>
+    <if test="modifyGuid != null and modifyGuid != '' ">
+      and	a.modifyGuid = #{modifyGuid}
+    </if>
+    <if test="isDeleted != null and isDeleted != '' ">
+      and	a.isDeleted = #{isDeleted}
+    </if>
+    <if test="serialVersionUID != null and serialVersionUID != '' ">
+      and	a.serialVersionUID = #{serialVersionUID}
+    </if>
+
+  </select>
+
+
+
   <insert id="insert" parameterType="com.gupiao.pojo.GuPiao">
     <!--
       WARNING - @mbggenerated

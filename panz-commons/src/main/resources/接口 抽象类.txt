@@ -1,0 +1,22 @@
+接口继承的作用
+for (BeanPostProcessor bp : getBeanPostProcessors()) {
+				if (bp instanceof InstantiationAwareBeanPostProcessor) {
+					InstantiationAwareBeanPostProcessor ibp = (InstantiationAwareBeanPostProcessor) bp;
+					if (!ibp.postProcessAfterInstantiation(bw.getWrappedInstance(), beanName)) {
+						continueWithPropertyPopulation = false;
+						break;
+					}
+				}
+			}
+public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor 
+可以让不同功能的类区分开来，像上面代码一样，代码公共，但每个不同类型的类处理自己的实现。
+
+
+抽象类的作用
+	@Override
+	public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
+		return true;
+	}
+public abstract class InstantiationAwareBeanPostProcessorAdapter implements SmartInstantiationAwareBeanPostProcessor
+这个抽象类的作用就是不同的子类有同一个接口，但是有的子类不需要实现这个方法（或者有相同的实现），
+这时可以在这个抽象类中一起实现，实现了这个接口的子类就不用重写这个方法了。

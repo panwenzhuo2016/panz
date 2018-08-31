@@ -1,0 +1,58 @@
+里面有个 private List<Filter> filters = new ArrayList<Filter>(); 保存所有的filter
+
+
+这个configurers里面保存着所有的filter的配置类 ，如下
+
+private final LinkedHashMap<Class<? extends SecurityConfigurer<O, B>>, List<SecurityConfigurer<O, B>>> configurers = new LinkedHashMap<Class<? extends SecurityConfigurer<O, B>>, List<SecurityConfigurer<O, B>>>();
+
+	0 = {CsrfConfigurer@5555} 
+	1 = {ExceptionHandlingConfigurer@5559} 
+	2 = {HeadersConfigurer@5565} 
+	3 = {SessionManagementConfigurer@5579} 
+	4 = {SecurityContextConfigurer@5667} 
+	5 = {RequestCacheConfigurer@5672} 
+	6 = {AnonymousConfigurer@5707} 
+	7 = {ServletApiConfigurer@5731} 
+	8 = {DefaultLoginPageConfigurer@5737} 
+	9 = {LogoutConfigurer@5743} 
+	10 = {ExpressionUrlAuthorizationConfigurer@5753} 
+	11 = {FormLoginConfigurer@5759} 
+
+调用 这个SecurityConfigurer接口 的configure((B) this)接口方法（以上配置类均实现SecurityConfigurer接口）
+for (SecurityConfigurer<O, B> configurer : configurers) {
+			configurer.configure((B) this);
+		}
+每个configurer配置类 实现 configure方法完成 filter 的注入工作 ，分以下几步
+1 初始化自己的 filter
+2 从 private final Map<Class<? extends Object>, Object> sharedObjects = new HashMap<Class<? extends Object>, Object>(); 
+	0 = {HashMap$Node@5590} "interface org.springframework.security.core.userdetails.UserDetailsService" -> 
+	1 = {HashMap$Node@5591} "interface org.springframework.context.ApplicationContext" -> "org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@771a660: startup date [Thu Aug 16 12:44:11 CST 2018]; root of context hierarchy"
+	2 = {HashMap$Node@5592} "class org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder" -> 
+	3 = {HashMap$Node@5622} "interface org.springframework.security.web.context.SecurityContextRepository" -> 
+	4 = {HashMap$Node@5794} "class org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter" -> 
+	5 = {HashMap$Node@5646} "interface org.springframework.security.web.authentication.session.SessionAuthenticationStrategy" -> "org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy [delegateStrategies = [org.springframework.security.web.authentication.session.ChangeSessionIdAuthenticationStrategy@6e0e5dec, org.springframework.security.web.csrf.CsrfAuthenticationStrategy@7ec95456]]"
+	6 = {HashMap$Node@5593} "interface org.springframework.web.accept.ContentNegotiationStrategy" -> 
+	7 = {HashMap$Node@5647} "interface org.springframework.security.web.session.InvalidSessionStrategy" -> "null"
+	8 = {HashMap$Node@5692} "interface org.springframework.security.web.savedrequest.RequestCache" -> 
+	9 = {HashMap$Node@7053} "interface org.springframework.security.authentication.AuthenticationManager" -> 
+	10 = {HashMap$Node@5594} "interface org.springframework.security.authentication.AuthenticationTrustResolver" -> 
+这个里 拿出有用的信息完成自己特有的初始化任务
+3 调用 postProcess 抽象方法 完成处理 （以上配置类均继承 SecurityConfigurerAdapter 抽象类）
+	这个类里有个内部类 CompositeObjectPostProcessor 
+	维护一个处理类的列表 private List<ObjectPostProcessor<? extends Object>> postProcessors = new ArrayList<ObjectPostProcessor<?>>();
+    再循环调用他们的postProcess(O object)接口方法 （注意 这个传入的是object 类型） 
+	这个方法会去调用 BeanFactory.initializeBean  BeanFactory.autowireBean(object) 两个常用的spring方法。
+4 完成之后放入到 filters列表里。
+
+------------------------
+initializeBean 分以下几步
+	applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
+		拿到getBeanPostProcessors();所有的BeanPostProcessor 后置处理器 
+		依次调用 beanProcessor.postProcessBeforeInitialization(result, beanName);
+		（其实大部分实现类都没有实现该方法，因为没有那么多事情做，所以直接返回bean）
+	invokeInitMethods(beanName, wrappedBean, mbd);
+	applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
+		拿到getBeanPostProcessors();所有的BeanPostProcessor 后置处理器 
+		依次调用 beanProcessor.postProcessAfterInitialization(result, beanName);
+		（其实大部分实现类都没有实现该方法，因为没有那么多事情做，所以直接返回bean）
+	

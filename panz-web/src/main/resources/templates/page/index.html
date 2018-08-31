@@ -68,31 +68,42 @@
     <h1 style="text-align: center">!</h1>
 </div>
 <!--<div id="my-f" v-bind:class="{ myf: isActive, 'text-danger': hasError }">-->
-    <!--<todo-item-->
-            <!--v-for="item in groceryList"-->
-            <!--v-bind:todo="item"-->
-            <!--v-bind:key="item.id">-->
-    <!--</todo-item>-->
+<!--<todo-item-->
+<!--v-for="item in groceryList"-->
+<!--v-bind:todo="item"-->
+<!--v-bind:key="item.id">-->
+<!--</todo-item>-->
 <!--</div>-->
 <!--<div id="my-f2" v-bind:class="{ myf: isActive, 'text-danger': hasError }">-->
-    <!--<div v-bind:class="{ myfin: isActive}"></div>-->
+<!--<div v-bind:class="{ myfin: isActive}"></div>-->
 <!--</div>-->
 <!--<div id="app">-->
-    <!--<i-button v-on:click="show">点击</i-button>-->
-    <!--<Modal v-model="visible" title="欢迎">这个真不错</Modal>-->
+<!--<i-button v-on:click="show">点击</i-button>-->
+<!--<Modal v-model="visible" title="欢迎">这个真不错</Modal>-->
 <!--</div>-->
 <div id="timeformat" style="margin-left: 20px">
     <i-button v-on:click="rili">日历</i-button>
-    <br/>  <br/>
+    <br/> <br/>
     时间戳转换为日期：
     <i-input v-model="value" placeholder="时间戳" style="width: 200px"></i-input>
     <i-button v-on:click="change">转换</i-button>
     <i-input v-model="value2" style="width: 200px;"></i-input>
-    <br/>  <br/>
+    <br/> <br/>
     UUID：
     <i-button v-on:click="uuid">获取</i-button>
     <i-input v-model="value3" style="width: 300px;"></i-input>
     <i-input v-model="value4" style="width: 300px;"></i-input>
+</div>
+<br>
+<div id="table">
+    <i-button v-on:click="add">新增</i-button>
+    <i-button v-on:click="edit">修改</i-button>
+    <i-button v-on:click="add">删除</i-button>
+    <i-table border :columns="columns1" :data="data1">
+
+    </i-table>
+    <page :total="total" show-sizer show-total show-elevator
+          v-on:change="change" v-on:page-size-change="sizechange"  ></page>
 </div>
 <script>
 
@@ -122,7 +133,7 @@
                     _self._data.value4 = data[1];
                 })
             },
-            rili:function () {
+            rili: function () {
                 window.open("https://www.baidu.com/s?ie=UTF-8&amp;wd=日历;");
             }
         }
@@ -198,6 +209,55 @@
             }
         }
     })
+
+
+    var table = new Vue({
+        el: '#table',
+        data: {
+            columns1: [],
+            data1: [],
+            total : 0
+        },
+        created:function(){
+            var url=getRootPath() + "/gupiao/findData";
+            var _self=this;
+            $.get(url,function(data){
+                _self._data.columns1=data.columns1;
+                _self._data.data1=data.data1;
+                _self._data.total=data.total;
+            })
+        },
+        methods: {
+            add: function () {
+                this.$Message.config({
+                    top: 80,
+                    duration: 3
+                });
+                this.$Message.info('This is a info22 tip');
+            },
+            edit: function () {
+                this.$Message.config({
+                    top: 80,
+                    duration: 3
+                });
+                this.$Message.info('This is a info22 tip');
+            },
+            delete: function () {
+                this.$Message.config({
+                    top: 80,
+                    duration: 3
+                });
+                this.$Message.info('This is a info tip');
+            },
+            change: function () {
+                this.$Message.info('This is a info tip');
+            },
+            sizechange: function () {
+                this.$Message.info('This is a info tip');
+            }
+
+        }
+    });
 
     function getRootPath() {
         //获取当前网址，如： http://localhost:8083/proj/meun.jsp

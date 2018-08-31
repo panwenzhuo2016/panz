@@ -31,7 +31,6 @@ public class HttpUtil {
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     conn.getInputStream(),"GBK"));
             msg = in.readLine();
-            System.out.println(msg);
             in.close();
         }
         conn.disconnect();

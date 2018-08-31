@@ -41,22 +41,10 @@ public abstract class BaseEntity implements Serializable {
 		this.creator = creator;
 	}
 
-	public String getCreateTime() {
-		if(StringUtils.isEmpty(createTime)){
-			createTime=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		}
-		return createTime;
-	}
+
 
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
-	}
-
-	public String getModifyTime() {
-		if(StringUtils.isEmpty(modifyTime)){
-			modifyTime=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		}
-		return modifyTime;
 	}
 
 	public void setModifyTime(String modifyTime) {
