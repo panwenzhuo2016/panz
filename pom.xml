@@ -28,6 +28,7 @@
         <module>panz-security</module>
         <module>pwz-tools</module>
         <module>panz-sso</module>
+        <module>pwz-source</module>
     </modules>
 
     <properties>

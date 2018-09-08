@@ -1,5 +1,7 @@
 package com.pwz.unsafe;
 
+import com.pwz.myGenerator.Log;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -20,12 +22,14 @@ public class AA {
 
     }
     public static void sd(Counter counter) throws Exception{
-        int NUM_OF_THREADS = 100;
-        int NUM_OF_INCREMENTS = 100000;
+        int NUM_OF_THREADS = 10;
+        int NUM_OF_INCREMENTS = 1000;
         ExecutorService service = Executors.newFixedThreadPool(NUM_OF_THREADS);
         long before = System.currentTimeMillis();
+
         for (int i = 0; i < NUM_OF_THREADS; i++) {
             service.submit(new CounterClient(counter, NUM_OF_INCREMENTS));
+
         }
         service.shutdown();
         service.awaitTermination(1, TimeUnit.MINUTES);

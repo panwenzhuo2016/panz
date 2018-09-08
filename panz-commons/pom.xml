@@ -1,128 +1,125 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.pwz</groupId>
-  <artifactId>panz-commons</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
-  <parent>
     <groupId>com.pwz</groupId>
-    <artifactId>panz</artifactId>
+    <artifactId>panz-commons</artifactId>
     <version>1.0-SNAPSHOT</version>
-  </parent>
+
+    <parent>
+        <groupId>com.pwz</groupId>
+        <artifactId>panz</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-    <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-          <include>**/*.properties</include>
-        </includes>
-      </resource>
-    </resources>
-  </build>
-
-  <name>panz-commons</name>
-  <url>http://maven.apache.org</url>
-
+    <name>panz-commons</name>
+    <url>http://maven.apache.org</url>
 
 
-  <dependencies>
+    <dependencies>
 
 
-    <dependency>
-      <groupId>com.pwz</groupId>
-      <artifactId>pwz-poi</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
+        <dependency>
+            <groupId>com.pwz</groupId>
+            <artifactId>pwz-poi</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-      <version>1.2.44</version>
-    </dependency>
-      <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-          <version>3.1.0</version>
-      </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>4.1.6.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>com.belerweb</groupId>
-      <artifactId>pinyin4j</artifactId>
-      <version>2.5.1</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
-    <!--<dependency>-->
-      <!--<groupId>org.eclipse.jetty</groupId>-->
-      <!--<artifactId>jetty-server</artifactId>-->
-      <!--<version>8.1.7.v20120910</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>org.eclipse.jetty</groupId>-->
-      <!--<artifactId>jetty-http</artifactId>-->
-      <!--<version>8.1.7.v20120910</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>org.eclipse.jetty</groupId>-->
-      <!--<artifactId>jetty-io</artifactId>-->
-      <!--<version>8.1.7.v20120910</version>-->
-    <!--</dependency>-->
-    <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-security</artifactId>
-      <version>8.1.7.v20120910</version>
-    </dependency>
-      <dependency>
-          <groupId>javax.persistence</groupId>
-          <artifactId>persistence-api</artifactId>
-          <version>1.0</version>
-      </dependency>
-      <!--<dependency>-->
-      <!--<groupId>org.eclipse.jetty</groupId>-->
-      <!--<artifactId>jetty-util</artifactId>-->
-      <!--<version>8.1.7.v20120910</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>net.sourceforge.pinyin4j</groupId>-->
-      <!--<artifactId>pinyin4j</artifactId>-->
-      <!--&lt;!&ndash;<version>2.5.0</version>&ndash;&gt;-->
-    <!--</dependency>-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.44</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>javax.servlet-api</artifactId>-->
+            <!--<version>3.1.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-context</artifactId>-->
+            <!--<version>4.1.6.RELEASE</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
+        <!--<dependency>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-server</artifactId>-->
+        <!--<version>8.1.7.v20120910</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-http</artifactId>-->
+        <!--<version>8.1.7.v20120910</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-io</artifactId>-->
+        <!--<version>8.1.7.v20120910</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-security</artifactId>
+            <version>8.1.7.v20120910</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-util</artifactId>-->
+        <!--<version>8.1.7.v20120910</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>net.sourceforge.pinyin4j</groupId>-->
+        <!--<artifactId>pinyin4j</artifactId>-->
+        <!--&lt;!&ndash;<version>2.5.0</version>&ndash;&gt;-->
+        <!--</dependency>-->
 
-    <!-- https://mvnrepository.com/artifact/com.alibaba.rocketmq/rocketmq-client -->
-    <dependency>
-      <groupId>com.alibaba.rocketmq</groupId>
-      <artifactId>rocketmq-client</artifactId>
-      <version>3.6.2.Final</version>
-    </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba.rocketmq/rocketmq-client -->
+        <dependency>
+            <groupId>com.alibaba.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>3.6.2.Final</version>
+        </dependency>
 
-    <!-- https://mvnrepository.com/artifact/com.alibaba.rocketmq/rocketmq-common -->
-    <dependency>
-      <groupId>com.alibaba.rocketmq</groupId>
-      <artifactId>rocketmq-common</artifactId>
-      <version>3.6.2.Final</version>
-    </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba.rocketmq/rocketmq-common -->
+        <dependency>
+            <groupId>com.alibaba.rocketmq</groupId>
+            <artifactId>rocketmq-common</artifactId>
+            <version>3.6.2.Final</version>
+        </dependency>
 
-  </dependencies>
-
+    </dependencies>
 
 
 </project>
