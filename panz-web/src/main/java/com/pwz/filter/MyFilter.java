@@ -18,7 +18,7 @@ public class MyFilter implements Filter {
     private Log log = new Log("MyServlet");
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        log.info("自定义顾虑器初始化");
+        log.info("自定义过滤器初始化");
         log.write2Path();
     }
 
