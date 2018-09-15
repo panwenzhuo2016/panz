@@ -68,6 +68,14 @@
     modify_time, modify_guid, is_deleted
   </sql>
 
+  <!-- 添加 -->
+  <insert id="add" parameterType="com.pwz.gupiao.pojo.GuPiao">
+    INSERT INTO classify
+    (id,classify_name,sort)
+    VALUES
+    (#{id},#{classifyName},#{sort})
+  </insert>
+
   <!-- 通用查询结果列-->
   <sql id="Base_Column_List2">
     a.id as id,

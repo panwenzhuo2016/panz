@@ -46,4 +46,14 @@ public class GuPiaoController {
         return table;
     }
 
+
+    @RequestMapping(value = "add", method = RequestMethod.GET)
+    @ResponseBody
+    public GuPiao add(GuPiao guPiao) {
+        GuPiao g = guPiaoService.addorUpdate(guPiao);
+        return g;
+    }
+
+
+
 }

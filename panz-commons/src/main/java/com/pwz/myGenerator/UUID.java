@@ -6,4 +6,7 @@ public class UUID {
             System.out.println(java.util.UUID.randomUUID().toString());
         }
     }
+    public static String get(){
+        return java.util.UUID.randomUUID().toString().replace("-","");
+    }
 }

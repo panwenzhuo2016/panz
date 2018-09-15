@@ -11,4 +11,6 @@ import com.pwz.util.PageBean;
  **/
 public interface GuPiaoService {
     PageBean<GuPiao> findByPage(int currentPage, int pageSize);
+
+    GuPiao addorUpdate(GuPiao guPiao);
 }

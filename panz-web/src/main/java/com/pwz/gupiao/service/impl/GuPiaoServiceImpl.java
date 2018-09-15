@@ -6,7 +6,9 @@ import com.pwz.aop.MethodLog;
 import com.pwz.gupiao.dao.GuPiaoMapper;
 import com.pwz.gupiao.pojo.GuPiao;
 import com.pwz.gupiao.service.GuPiaoService;
+import com.pwz.myGenerator.UUID;
 import com.pwz.util.PageBean;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +46,17 @@ public class GuPiaoServiceImpl implements GuPiaoService {
         PageBean<GuPiao> pageData = new PageBean<>(currentPage, pageSize, countNums);
         pageData.setItems(allItems);
         return pageData;
+    }
+
+    @Override
+    public GuPiao addorUpdate(GuPiao guPiao) {
+        if(StringUtils.isBlank(guPiao.getId()) || guPiaoMapper.selectByPrimaryKey(guPiao.getId())== null){
+            guPiao.setId(UUID.get());
+            guPiaoMapper.insertSelective(guPiao);
+        }else {
+            guPiaoMapper.updateByPrimaryKey(guPiao);
+        }
+        return guPiao;
     }
 
     private void page(int currentPage, int pageSize) {

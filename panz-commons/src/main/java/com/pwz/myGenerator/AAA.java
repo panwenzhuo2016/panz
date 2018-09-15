@@ -8,13 +8,34 @@ import org.junit.Test;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author panwenzhuo
  * @date 2018/8/7 15:54
  */
 public class AAA {
+
+    @Test
+    public void dddf() {
+        List<String> df = new ArrayList<>(8);
+        df.add("34");
+        df.add("234");
+        df.add("234");
+        df.add("245");
+        df.add("3465");
+        df.add("5674567");
+        df.add("af");
+        df.add("er");
+        df.add("gf");
+        df.add("rt");
+        df.add("sdfdsfsdf");
+        df.add("sdfdsfsdf2");
+        System.out.println(df);
+
+    }
 
     @Test
     public void main() {

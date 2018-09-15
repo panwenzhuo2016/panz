@@ -77,12 +77,17 @@
 <!--<div id="my-f2" v-bind:class="{ myf: isActive, 'text-danger': hasError }">-->
 <!--<div v-bind:class="{ myfin: isActive}"></div>-->
 <!--</div>-->
-<!--<div id="app">-->
-<!--<i-button v-on:click="show">点击</i-button>-->
-<!--<Modal v-model="visible" title="欢迎">这个真不错</Modal>-->
-<!--</div>-->
+<div id="app">
+    <i-button v-on:click="show">点击</i-button>
+    <Modal v-model="visible" title="欢迎">
+        名字    <i-input v-model="minzi" style="width: 200px;"></i-input><br>
+        代码    <i-input v-model="daima" style="width: 200px;"></i-input><br>
+        当前价格    <i-input v-model="jiage" style="width: 200px;"></i-input><br>
+
+    </Modal>
+</div>
 <div id="timeformat" style="margin-left: 20px">
-    <i-button v-on:click="rili">日历</i-button>
+    <!--<i-button v-on:click="rili">日历</i-button>-->
     <br/> <br/>
     时间戳转换为日期：
     <i-input v-model="value" placeholder="时间戳" style="width: 200px"></i-input>
@@ -145,7 +150,10 @@
     new Vue({
         el: '#app',
         data: {
-            visible: false
+            visible: false,
+            minzi: '',
+            daima: '',
+            jiage: ''
         },
         methods: {
             show: function () {
