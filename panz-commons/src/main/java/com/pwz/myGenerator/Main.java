@@ -12,13 +12,13 @@ public class Main {
     // d列 类型 a大文本b日期 c 人
     // e列 展示字段
     // f列 查询条件
-    @Test
+//    @Test
     public void data() throws Exception{
         EntityUtil entityUtil = new EntityUtil();
         entityUtil.generate("data");
     }
     //生成文件
-    @Test
+//    @Test
     public void build() throws Exception{
 //        EntityUtil entityUtil = new EntityUtil();
 //        entityUtil.generate("build");
@@ -26,13 +26,13 @@ public class Main {
         e.generate("build");
     }
     //生成字典sql
-    @Test
+//    @Test
     public void sql() throws Exception{
         EntityUtil entityUtil = new EntityUtil();
         entityUtil.generate("sql");
     }
 
-    @Test
+//    @Test
     public void html() throws Exception{
         BuildHtml buildHtml = new BuildHtml();
         buildHtml.buildHtml(); //web html生成
@@ -42,7 +42,7 @@ public class Main {
     }
 
 
-    @Test
+//    @Test
     public void htmdl() throws Exception{
         StringBuilder sql = new StringBuilder();
         sql.append("select a.db_jieguo_tbr_guid as jieGuoGuid, b.bd_guid as biaoDuanGuid, d.gc_guid as gongChengGuid, e.xm_guid as xiangMuGuid,");

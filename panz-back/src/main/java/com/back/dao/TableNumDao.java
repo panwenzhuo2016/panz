@@ -1,6 +1,5 @@
 package com.back.dao;
 
-import com.back.po.Note;
 import com.back.po.TableNum;
 
 import java.util.List;

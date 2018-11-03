@@ -16,7 +16,7 @@
         </commentGenerator>
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost/guns" userId="root" password="root">
+                        connectionURL="jdbc:mysql://localhost/notebook" userId="root" password="root">
         </jdbcConnection>
         <javaTypeResolver>
             <!-- This property is used to specify whether MyBatis Generator should
@@ -41,7 +41,31 @@
         </javaClientGenerator>
 
         <!-- 要生成哪些表 -->
-        <table tableName="gu_piao" domainObjectName="GuPiao"
+        <table tableName="sys_auth" domainObjectName="SysAuth"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="sys_group_auth" domainObjectName="SysGroupAuth"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="sys_group_role" domainObjectName="SysGroupRole"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="sys_role_auth" domainObjectName="SysRoleAuth"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="sys_user_auth" domainObjectName="SysUserAuth"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="sys_user_group" domainObjectName="SysUserGroup"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="sys_user_role" domainObjectName="SysUserRole"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>

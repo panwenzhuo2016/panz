@@ -8,7 +8,9 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -22,12 +24,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class TransactionDemo2 {
 
+    // or execution(* com..*.*(..))
     @Pointcut(value = "execution(* com.pwz.gupiao..*.*(..))")
     public void point() {
 
     }
 
     private AtomicInteger count = new AtomicInteger(1);
+    private ThreadLocal<Integer> count2 = new ThreadLocal<>();
 
     @Around("point()")
 //    @Around("@annotation(com.pwz.aop.MethodLog)")
@@ -35,10 +39,17 @@ public class TransactionDemo2 {
         count.getAndIncrement();
         com.pwz.myGenerator.Log log = new com.pwz.myGenerator.Log("方法调用日志记录");
         long start = System.currentTimeMillis();
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
-        Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        UserDetails userDetails = null;
+        if(authentication != null){
+             userDetails = (UserDetails)authentication.getPrincipal();
+        }
+
+        Collection<? extends GrantedAuthority> authorities = userDetails != null ? userDetails.getAuthorities() : null;
+        log.info("");
+        log.info("当前线程--    名称： " + Thread.currentThread().getName());
+        log.info("当前线程--      ID： " + Thread.currentThread().getId());
         log.info("当前登录人--  名称： " + userDetails);
         log.info("当前登录人--  权限： " + authorities);
         log.info("日志记录--    方法： " + joinPoint.getSignature().toLongString());
@@ -53,7 +64,13 @@ public class TransactionDemo2 {
             throw e;
         } finally {
             long end = System.currentTimeMillis();
-            log.info("日志记录--调用时长： " + (end - start) + "ms; 调用次数：" + count);
+            Integer integer = count2.get();
+            if (integer == null) {
+                integer = 0;
+            }
+            integer++;
+            count2.set(integer);
+            log.info("日志记录--调用时长： " + (end - start) + "ms; 调用次数：" + count2.get());
             log.write2Path();
         }
         return proceed;

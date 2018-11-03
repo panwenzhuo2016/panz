@@ -61,6 +61,18 @@
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-jdbc</artifactId>
     </dependency>
+
+
+    <!-- caching -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.ehcache</groupId>
+      <artifactId>ehcache</artifactId>
+    </dependency>
+
     <!--Json Support-->
     <!--<dependency>-->
       <!--<groupId>com.alibaba</groupId>-->
@@ -68,19 +80,21 @@
       <!--<version>1.1.43</version>-->
     <!--</dependency>-->
     <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>17.0</version>
-    </dependency>
 
     <!-- spring boot devtools 依赖包. -->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework.boot</groupId>-->
+      <!--<artifactId>spring-boot-devtools</artifactId>-->
+      <!--<optional>true</optional>-->
+      <!--<scope>true</scope>-->
+    <!--</dependency>-->
+    <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <optional>true</optional>
-      <scope>true</scope>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.3.3</version>
     </dependency>
+
 
   </dependencies>
 
@@ -91,13 +105,39 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
 
+      <!--<plugin>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+        <!--<configuration>-->
+          <!--&lt;!&ndash; 如果没有该项配置，devtools不会起作用，即应用不会restart &ndash;&gt;-->
+          <!--<fork>true</fork>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
+
+      <!-- 打包成可执行jar,防止中文乱码，必须要下面这一个插件  -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>utf-8</encoding>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <!-- 如果没有该项配置，devtools不会起作用，即应用不会restart -->
-          <fork>true</fork>
+          <!-- 这里为项目启动类-->
+          <mainClass>com.Study</mainClass>
         </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
     </plugins>

@@ -4,7 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInterceptor;
 import com.pwz.myGenerator.Log;
 import com.pwz.util.ExceptionUtil;
-import com.pwz.util.SpringUtil;
+import com.pwz.util.ResourceUtil;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -13,15 +14,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.context.ApplicationContext;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.MultipartConfigElement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -32,6 +34,7 @@ import java.util.Properties;
 @SpringBootApplication
 @ComponentScan
 @MapperScan("com.pwz.*.dao")
+@EnableCaching
 @ServletComponentScan
 public class Study {
 
@@ -57,7 +60,7 @@ public class Study {
 
         sqlSessionFactoryBean.setPlugins(plugins);
 
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mybatis/*.xml"));
+        sqlSessionFactoryBean.setMapperLocations(ResourceUtil.getResource(resolver,"classpath:/mybatis/*.xml","classpath:/mybatis/*/*.xml"));
 
         return sqlSessionFactoryBean.getObject();
     }
@@ -81,8 +84,10 @@ public class Study {
         pageInterceptor.setProperties(properties);
         return pageInterceptor;
     }
-
+    private static final org.apache.commons.logging.Log logger = LogFactory
+            .getLog(Study.class);
     public static void main(String[] args) {
+        logger.info("开始---");
         SpringApplication.run(Study.class,args);
         try {
         } catch (Exception e){
@@ -94,4 +99,24 @@ public class Study {
         }
 
     }
+
+
+    /**
+     * 文件上传配置
+     * @return
+     */
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        //单个文件最大
+        factory.setMaxFileSize("10240KB"); //KB,MB
+        /// 设置总上传数据总大小
+        factory.setMaxRequestSize("102400KB");
+        return factory.createMultipartConfig();
+    }
+
+//    @Bean
+//    public MultipartResolver multipartResolver() {
+//        return new CommonsMultipartResolver();
+//    }
 }

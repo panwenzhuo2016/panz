@@ -38,6 +38,7 @@ public class MyServlet extends HttpServlet {
         } catch (Exception e){
             final String content = ExceptionUtil.getContent(e);
             log.info(content);
+            e.printStackTrace();
             throw e;
         }finally {
             log.write2Path();
@@ -53,6 +54,7 @@ public class MyServlet extends HttpServlet {
         } catch (Exception e) {
             final String content = ExceptionUtil.getContent(e);
             log.info(content);
+            e.printStackTrace();
             throw e;
         } finally {
             log.write2Path();

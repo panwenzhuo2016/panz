@@ -3,22 +3,26 @@ package com.pwz.myGenerator;
 import com.pwz.util.DateUtil;
 import com.pwz.util.FileUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
 
-import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author panwenzhuo
  * @date 2018/8/7 15:54
  */
 public class AAA {
+    public static void main(String[] args) {
+        String[] tbr_name = FileUtil.getFileContent("G:\\zhulong\\zhuzhengshi\\new 3.txt");
+        int i = 0;
+        for (String s : tbr_name) {
+            String a = s.substring(s.indexOf("=") + 2);
+            byte dd = Byte.valueOf(a);
+            System.out.print((char) dd);
+        }
+    }
 
-    @Test
+//    @Test
     public void dddf() {
         List<String> df = new ArrayList<>(8);
         df.add("34");
@@ -37,7 +41,7 @@ public class AAA {
 
     }
 
-    @Test
+//    @Test
     public void main() {
         String s = "1\t深圳市龙华区建筑工务局\t3\t100350.14\n"
                 + "2\t深圳市建筑工务署工程管理中心\t4\t30858.74\n"
@@ -53,7 +57,7 @@ public class AAA {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main1212(String[] args) {
         String[] tbr_name = FileUtil.getFileContent("G:\\zhulong\\zhuzhengshi\\new 3.txt");
         String[] create_time = FileUtil.getFileContent("G:\\zhulong\\zhuzhengshi\\new 4.txt");
 

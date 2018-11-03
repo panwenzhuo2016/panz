@@ -15,10 +15,14 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
 
 logging:
   level:
-    com.*.dao : debug
+    com.pwz.gupiao.dao: debug
+
 
 
 pagehelper:
@@ -26,3 +30,17 @@ pagehelper:
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
+
+#mybatis配置 第一种和第二种需要 第三种不需要
+mybatis:
+  #mapper.xml文件位置
+  mapper-locations: classpath:/mybatis/*/*.xml
+  check-config-location: true
+  #对应mapper的实体类
+  type-aliases-package: com.pwz.*.dao
+
+
+
+#spring:
+#  aop:
+#    proxy-target-class: true

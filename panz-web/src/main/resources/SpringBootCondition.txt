@@ -1,0 +1,36 @@
+SpringBootCondition  抽象类
+它的  抽象方法 	public abstract ConditionOutcome getMatchOutcome(ConditionContext context,
+         			AnnotatedTypeMetadata metadata);
+         			由子类实现， 实现 不同的限制功能
+        如  OnBeanCondition
+        处理了三种注解  ConditionalOnBean  当且仅当指定的bean classes and/or bean names在当前容器中,才创建标记上该注解的类的实例
+                        ConditionalOnSingleCandidate
+                        ConditionalOnMissingBean
+
+
+
+      @Conditional(TestCondition.class)
+
+      这句代码可以标注在类上面，表示该类下面的所有@Bean都会启用配置，也可以标注在方法上面，只是对该方法启用配置。
+
+
+
+      Spring框架还提供了很多@Condition给我们用，当然总结用语哪种好理解，看给位读者喽
+
+      @ConditionalOnBean（仅仅在当前上下文中存在某个对象时，才会实例化一个Bean）
+      @ConditionalOnClass（某个class位于类路径上，才会实例化一个Bean）
+      @ConditionalOnExpression（当表达式为true的时候，才会实例化一个Bean）
+      @ConditionalOnMissingBean（仅仅在当前上下文中不存在某个对象时，才会实例化一个Bean）
+      @ConditionalOnMissingClass（某个class类路径上不存在的时候，才会实例化一个Bean）
+      @ConditionalOnNotWebApplication（不是web应用）
+
+      后续会继续补充
+
+      另一种总结
+
+      @ConditionalOnClass：该注解的参数对应的类必须存在，否则不解析该注解修饰的配置类；
+      @ConditionalOnMissingBean：该注解表示，如果存在它修饰的类的bean，则不需要再创建这个bean；可以给该注解传入参数例如@ConditionOnMissingBean(name = "example")，这个表示如果name为“example”的bean存在，这该注解修饰的代码块不执行。
+
+      ---------------------
+
+      本文来自 浪子艳少 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/win7system/article/details/54377471?utm_source=copy
