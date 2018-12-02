@@ -1,25 +1,11 @@
 package com.pwz;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**********************************************************
- * Copyright ? 2014，福建亿同世纪软件有限公司
- * All Rights Reserved.
- *
- * 文件名称： StringUtil.java
- * 摘    要： [简要描述本文件的内容]
- *
- * 初始版本：1.0.0
- * 原 作 者：panwz
- * 完成日期： 2017年1月14日 下午12:26:45 
-	
- * 当前版本： 1.0.0
- * 作    者： panwz
- * 完成日期： 2017年1月14日 下午12:26:45 
- * 
- *****************************************************************/
-public final class StringUtil {
+public final class StringUtil extends StringUtils{
 
 	/**
 	 * 空字符串.
@@ -372,6 +358,49 @@ public final class StringUtil {
         String s1 = s.substring(0, 1);
         String s2 = s.substring(1, s.length());
         return s1.toUpperCase() + s2;
+    }
+
+
+    public static String up(String s) {
+        if (s == null) {
+            return "";
+        }
+        if (s.length() < 2) {
+            return s;
+        }
+        String s1 = s.substring(0, 1);
+        String s2 = s.substring(1, s.length());
+        return s1.toUpperCase() + s2;
+    }
+    public static String low(String s) {
+        if (s == null) {
+            return "";
+        }
+        if (s.length() < 2) {
+            return s;
+        }
+        String s1 = s.substring(0, 1);
+        String s2 = s.substring(1, s.length());
+        return s1.toLowerCase() + s2;
+    }
+
+    /**
+     * 是0 1的转成 TrueOrFalse
+     *
+     * @param str 输入值 0 1
+     * @return TrueOrFalse
+     */
+    public static String getTOrF(String str) {
+        if (StringUtils.isBlank(str)) {
+            return "false";
+        }
+        if ("1".equals(str)) {
+            return "true";
+        } else if ("0".equals(str)) {
+            return "false";
+        } else {
+            return str;
+        }
     }
 }
 

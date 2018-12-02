@@ -1,7 +1,5 @@
 package com.pwz.util;
 
-import com.pwz.myGenerator.MakeTable.A;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,11 +59,11 @@ public class FileUtil {
 
     }
 
-    public static String[] getFileContent(String p) {
+    public static String[] getFileContent(String path) {
         StringBuffer sb = new StringBuffer("");
         try {
             // read file content from file
-            FileReader reader = new FileReader(p);
+            FileReader reader = new FileReader(path);
             BufferedReader br = new BufferedReader(reader);
             String str = null;
             while ((str = br.readLine()) != null) {

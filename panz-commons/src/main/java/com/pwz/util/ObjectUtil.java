@@ -2,7 +2,7 @@ package com.pwz.util;
 
 
 import com.pwz.anno.Length;
-import org.apache.commons.lang3.StringUtils;
+import com.pwz.StringUtil;
 
 import javax.persistence.Column;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -80,7 +80,7 @@ public class ObjectUtil {
                 Class<?> type = declaredField.getType();
                 Method method = null;
                 try {
-                    method = tClass.getMethod("set" + up(fieldName), type);
+                    method = tClass.getMethod("set" + com.pwz.StringUtil.up(fieldName), type);
                 } finally {
                     if(method == null){
                         continue;
@@ -165,20 +165,20 @@ public class ObjectUtil {
         }
         String r = "";
         for (String s : fieldName.split("_")) {
-            r +=  low(s) + "_";
+            r +=  StringUtil.low(s) + "_";
         }
         return r.substring(0,r.length()-1);
     }
 
     private static Object dealInt(String s) {
-        if (StringUtils.isBlank(s)) {
+        if (StringUtil.isEmpty(s)) {
             return new Integer(0);
         }
         return new Integer(s);
     }
 
     private static BigDecimal dealBig(String s) {
-        if (StringUtils.isBlank(s)) {
+        if (StringUtil.isBlank(s)) {
             return new BigDecimal(0);
         }
         return new BigDecimal(s);
@@ -199,7 +199,7 @@ public class ObjectUtil {
 
     private static XMLGregorianCalendar dealTime(Object object) {
         String ob = "0";
-        if (object != null && StringUtils.isNotBlank(dealString(object, false))) {
+        if (object != null && StringUtil.isNotBlank(dealString(object, false))) {
             ob = object.toString();
         }
         Long time = Long.parseLong(ob);
@@ -246,51 +246,10 @@ public class ObjectUtil {
             return "";
         }
         String r = obj.toString();
-        if (getTOrF && StringUtils.isNotBlank(r)) {
-            r = getTOrF(r);
+        if (getTOrF && StringUtil.isNotBlank(r)) {
+            r = StringUtil.getTOrF(r);
         }
         return r;
     }
 
-    public static String up(String s) {
-        if (s == null) {
-            return "";
-        }
-        if (s.length() < 2) {
-            return s;
-        }
-        String s1 = s.substring(0, 1);
-        String s2 = s.substring(1, s.length());
-        return s1.toUpperCase() + s2;
-    }
-    public static String low(String s) {
-        if (s == null) {
-            return "";
-        }
-        if (s.length() < 2) {
-            return s;
-        }
-        String s1 = s.substring(0, 1);
-        String s2 = s.substring(1, s.length());
-        return s1.toLowerCase() + s2;
-    }
-
-    /**
-     * 是0 1的转成 TrueOrFalse
-     *
-     * @param str 输入值 0 1
-     * @return TrueOrFalse
-     */
-    private static String getTOrF(String str) {
-        if (StringUtils.isBlank(str)) {
-            return "false";
-        }
-        if ("1".equals(str)) {
-            return "true";
-        } else if ("0".equals(str)) {
-            return "false";
-        } else {
-            return str;
-        }
-    }
 }
